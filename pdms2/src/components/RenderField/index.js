@@ -8,8 +8,9 @@ const RenderField = ({
   type,
   options,
   meta: { touched, error, warning }
-}) => (
-  <FormGroup color={touched && error ? 'danger' : ''}>
+}) => {
+  console.log("12343", input)
+  return (<FormGroup color={touched && error ? 'danger' : ''}>
     <Label>
       {label}
     </Label>
@@ -21,8 +22,8 @@ const RenderField = ({
       }
     </Input>
     {touched && error && <FormFeedback>{error}</FormFeedback>}
-  </FormGroup>
-)
+  </FormGroup>)
+}
 
 RenderField.propTypes = {
   input: PropTypes.object,

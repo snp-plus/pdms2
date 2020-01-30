@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 import { selectAuthenticated } from 'selectors';
 import { createStructuredSelector } from 'reselect';
 
-import Login from 'containers/Login';
+import Login from './containers/Login';
+import Register from './containers/Register';
 
 const Routes = () => {
 	return (
 		<Router>
 			<Container className="main-container">
 				<Route exact path='/' component={Login} />
+				<Route path='/register' component={Register} />
 			</Container>
 		</Router>
 	);
