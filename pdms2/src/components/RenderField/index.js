@@ -9,7 +9,6 @@ const RenderField = ({
   options,
   meta: { touched, error, warning }
 }) => {
-  console.log("12343", input)
   return (<FormGroup color={touched && error ? 'danger' : ''}>
     <Label>
       {label}
