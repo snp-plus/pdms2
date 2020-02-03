@@ -13,7 +13,6 @@ import {
 }  from '../constants/auth';
 
 export function loginRequest(payload) {
-  console.log("loginrequst action", payload);
   return {
     type: LOGIN_REQUEST,
     payload,

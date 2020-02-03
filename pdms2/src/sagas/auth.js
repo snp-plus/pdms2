@@ -18,6 +18,7 @@ import { getHeaders, getErrorMessage } from '../utils/authHelpers';
 import { setItem } from '../utils/localStorage';
 
 axios.defaults.baseURL = '/';
+
 export function* loginRequestHandler({ payload }) {
   const params = {
     url: 'api/login/',
@@ -25,7 +26,6 @@ export function* loginRequestHandler({ payload }) {
     headers: getHeaders(),
     data: payload,
   }
-  console.log("loginRequest call", params);
   try {
     const res = yield call(axios.request, params);
     yield call(setItem, 'auth', JSON.stringify(res.data));

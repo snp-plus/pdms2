@@ -9,11 +9,12 @@ const RenderField = ({
   options,
   meta: { touched, error, warning }
 }) => {
+  console.log("meta", touched, error, warning)
   return (<FormGroup color={touched && error ? 'danger' : ''}>
     <Label>
       {label}
     </Label>
-    <Input {...input} type={type} className='form-control'>
+    <Input {...input} type={type} className='form-control' required>
       {
         type === 'select' && options ? options.map((option, index) => (
           <option key={index} value={option.value}>{option.label}</option>

@@ -19,7 +19,10 @@ const auth = getItem('auth');
 const initialState = {
   loggedInUser: auth ? JSON.parse(auth).user : null,
   status: null,
-  error: null,
+  error: {
+    login: null,
+    register: null,
+  },
 }
 
 export default function authReducer(state = initialState, { type, payload }) {
@@ -29,7 +32,9 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         loggedInUser: null,
         status: type,
-        error: null,
+        error: {
+          login: null,
+        }
       }
 
     case LOGIN_SUCCESS:
@@ -37,7 +42,9 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         loggedInUser: payload,
         status: type,
-        error: null,
+        error: {
+          login: null,
+        }
       }
 
     case LOGIN_FAIL:
@@ -45,7 +52,9 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         loggedInUser: null,
         status: type,
-        error: payload,
+        error: {
+          login: payload,
+        }
       }
 
     case LOGOUT:
@@ -55,7 +64,10 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         loggedInUser: null,
         status: null,
-        error: null,
+        error: {
+          login: null,
+          register: null,
+        }
       }
 
     case REGISTER_REQUEST:
@@ -63,7 +75,9 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         loggedInUser: null,
         status: type,
-        error: null,
+        error: {
+          register: null,
+        }
       }
 
     case REGISTER_SUCCESS:
@@ -71,22 +85,30 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         loggedInUser: null,
         status: type,
-        error: null,
+        error: {
+          register: null,
+        }
       }
 
     case REGISTER_FAIL:
+      console.log("register reducer fail", payload)
       return {
         ...state,
         loggedInUser: null,
         status: type,
-        error: payload,
+        error: {
+          register: payload,
+        }
       }
 
       case INITIALIZE_STATUS:
       return {
         ...state,
         status: null,
-        error: null,
+        error: {
+          login: null,
+          register: null,
+        }
       }
 
     default:
