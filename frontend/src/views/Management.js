@@ -1,30 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Loading from "../components/Loading";
 import { useAuth0 } from "../react-auth0-spa";
 import { AgGridReact } from 'ag-grid-react';
+import { AllModules } from "@ag-grid-enterprise/all-modules";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import './style.css';
 import data from './data.json';
 import LocationSearchInput from '../components/LocationSearchInput.js';
-import DegreeRenderer from '../components/Degree';
-
-function AgGridCheckbox (props) {
-  const boolValue = props.value && props.value.toString() === 'true';
-  const [isChecked, setIsChecked] = useState(boolValue);
-  const onChanged = () => {
-    props.setValue(!isChecked);
-    setIsChecked(!isChecked);
-  };
-  return (
-    <div>
-      <input type="checkbox" className="grid-checkbox" checked={isChecked} onChange={onChanged} />
-    </div>
-  );
-}
+import { createNewRowData, printResult, createMyDataSource, FakeServer, ServerSideDatasource } from '../utils/gridFunctions.js';
+import AgGridCheckbox from '../components/AgGridCheckbox.js';
 
 const Management = () => {
   const { loading, user } = useAuth0();
+
+  const [gridApi, setGridApi] = useState();
+  const [modules, setModules] = useState(AllModules);
+  const [cacheBlockSize, setCacheBlockSize] = useState(100);
+  const [maxBlocksInCache, setMaxBlocksInCache] = useState(10);
+
+  const onGridReady = useCallback(
+    (params) => {
+      const { api, columnApi } = params;
+      setGridApi({ api, columnApi });
+
+      const httpRequest = new XMLHttpRequest();
+      const updateData = data => {
+        const datasource = createMyDataSource(data);
+        params.api.setServerSideDatasource(datasource);
+      };
+
+      httpRequest.open(
+        "GET",
+        "http://localhost:4000/api/getAllData"
+      );
+      httpRequest.send();
+      httpRequest.onreadystatechange = () => {
+        console.log(httpRequest.responseText)
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+          console.log("update area")
+          updateData(JSON.parse(httpRequest.responseText));
+        }
+      };
+    },
+    []
+  );
 
   const [columnDefs, setColumnDefs] = useState([
     {
@@ -78,7 +98,8 @@ const Management = () => {
     {headerName: 'zip', field: 'zip'},
     {headerName: 'phone', field: 'phone'},
     {headerName: 'fax', field: 'fax'},
-    {headerName: 'latitude', field: 'longitude'},
+    {headerName: 'latitude', field: 'latitude'},
+    {headerName: 'longitude', field: 'longitude'},
     {headerName: 'taxid', field: 'taxid'},
     {headerName: 'statelicensenumber', field: 'statelicensenumber'},
     {headerName: 'country', field: 'country'},
@@ -245,69 +266,75 @@ const Management = () => {
 
   const [rowData, setRowData] = useState(null);
   const [floatingFilter, setFloatingFilter] = useState(true);
-  // const [rowSelection, setRowSelection] = useState("single");
-  // const [rowModelType, setRowModelType] = useState('serverSide');
-
-  // const onGridReady = params => {
-  //   this.gridApi = params.api;
-  //   this.gridColumnApi = params.columnApi;
-
-  //   const httpRequest = new XMLHttpRequest();
-  //   const updateData = data => {
-  //     var datasource = createMyDataSource(data);
-  //     params.api.setServerSideDatasource(datasource);
-  //   };
-
-    // httpRequest.open(
-    //   "GET",
-    //   "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinners.json"
-    // );
-    // httpRequest.send();
-    // httpRequest.onreadystatechange = () => {
-    //   if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-    //     updateData(JSON.parse(httpRequest.responseText));
-    //   }
-    // };
-  // };
-
-  const onFirstDataRendered = (params) => {
-    params.api.sizeColumnsToFit();
-  }
-
-  useEffect(() => {
-    setRowData(data);
-  })
+  const [rowSelection, setRowSelection] = useState("multiple");
+  const [rowModelType, setRowModelType] = useState('serverSide');
 
   if (loading || !user) {
     return <Loading />;
   }
 
-  // const onBtAdd = () => {
-  //   var selectedRows = this.gridApi.getSelectedNodes();
-  //   if (!selectedRows || selectedRows.length === 0) {
-  //     return;
-  //   }
-  //   var selectedRow = selectedRows[0];
-  //   window.rowDataServerSide.splice(selectedRow.rowIndex, 0, { athlete: "New Item" + newItemCount });
-  //   newItemCount++;
-  //   this.gridApi.purgeServerSideCache();
-  // }
 
-  // const onBtRemove = () => {
-  //   var selectedRows = this.gridApi.getSelectedNodes();
-  //   if (!selectedRows || selectedRows.length === 0) {
-  //     return;
-  //   }
-  //   var selectedRow = selectedRows[0];
-  //   window.rowDataServerSide.splice(selectedRow.rowIndex, 1);
-  //   this.gridApi.purgeServerSideCache();
-  // }
+  const onQuickFilterChanged = () => {
+    console.log("gridAPI1", gridApi)
+    gridApi.api.setQuickFilter(document.getElementById("quickFilter").value);
+  }
+
+  const onRowEditingStarted = (event) => {
+    console.log("onROwEditing Started", event)
+  }
+
+  const onRowEditingStopped = (event) => {
+    console.log("onROwEditing STopted*****", event)
+  }
+
+  const onCellEditingStarted = (event) => {
+    console.log("onCellEditing Started", event)
+  }
+
+  const onCellEditingStopped = (event) => {
+    console.log("onCellEditing Stopped", event)
+    const json = JSON.stringify(event.data);
+
+    const httpRequest = new XMLHttpRequest();
+
+    httpRequest.open(
+      "PUT",
+      "http://localhost:4000/api/updateData",
+      true
+    );
+    httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
+    httpRequest.send(json);
+  }
+
+  const addNewRow = () => {
+    const position = window.rowDataServerSide.length;
+    window.rowDataServerSide.splice(position, 0, { id: position + 1 }); //should change first parameter
+    gridApi.api.purgeServerSideCache();
+  }
+
+  const onRemoveSelected = () => {
+    var selectedRows = gridApi.api.getSelectedRows();
+    if(!selectedRows || selectedRows.length === 0) return;
+    console.log("selectedRows", selectedRows, window.rowDataServerSide)
+    const selectedRowStart = selectedRows[0];
+    const selectedLength = selectedRows.length;
+    console.log("+++++", selectedRowStart, selectedLength)
+    window.rowDataServerSide.splice(selectedRowStart.rowIndex, selectedLength);
+    gridApi.api.purgeServerSideCache();
+  }
 
   return (
     <div className="ag-theme-balham management" >
-      <div style={{ marginBottom: "5px" }}>
-        {/* <button onClick={onBtAdd.bind(this)}>Add Row</button>
-        <button onClick={onBtRemove.bind(this)}>Remove Row</button> */}
+      <div className="search-area">
+        <button className="deletebutton" onClick={() => onRemoveSelected()}>Remove Row</button> 
+        <button className="addbutton" onClick={() => addNewRow()}>Add Row</button>
+        <input
+          className="filterbox"
+          type="text"
+          onInput={() => onQuickFilterChanged()}
+          id="quickFilter"
+          placeholder="quick filter..."
+        />
       </div>
       <AgGridReact
         columnDefs={columnDefs}
@@ -316,25 +343,23 @@ const Management = () => {
         defaultColGroupDef={defaultColGroupDef}
         columnTypes={columnTypes}
         floatingFilter={floatingFilter}
-        // rowSelection={rowSelection}
-        // rowModelType={rowModelType}
-        // onGridReady={onGridReady}
+        rowSelection={rowSelection}
+        rowModelType={rowModelType}
+        onGridReady={onGridReady}
+        animateRows={true}
+        modules={modules}
+        cacheBlockSize={cacheBlockSize}
+        maxBlocksInCache={maxBlocksInCache}
+        onRowEditingStarted={onRowEditingStarted}
+        onRowEditingStopped={onRowEditingStopped}
+        onCellEditingStarted={onCellEditingStarted}
+        onCellEditingStopped={onCellEditingStopped}
       >
       </AgGridReact>
     </div>
   );
 };
 
-// var newItemCount = 0;
-// function createMyDataSource(data) {
-//   window.rowDataServerSide = data;
-//   function MyDatasource() {}
-//   MyDatasource.prototype.getRows = function(params) {
-//     var rowsThisPage = data.slice(params.startRow, params.endRow);
-//     params.successCallback(rowsThisPage, window.rowDataServerSide.length);
-//   };
-//   return new MyDatasource();
-// }
-
-
 export default Management;
+
+

@@ -34,7 +34,7 @@ const App = () => {
             {/* <PrivateRoute path="/profile" component={Management} /> */}
           </Switch>
         </div>
-        <Footer />
+        {isAuthenticated? '' : <Footer />}
       </div>
     </Router>
   );
