@@ -7,9 +7,12 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import './style.css';
 import data from './data.json';
-import LocationSearchInput from '../components/LocationSearchInput.js';
-import { createNewRowData, printResult, createMyDataSource, FakeServer, ServerSideDatasource } from '../utils/gridFunctions.js';
+import SearchInput from '../components/SearchInput.js';
+import { createNewRowData, printResult, createMyDataSource, ServerSideDatasource, getDatePicker, NumericCellEditor, FakeServer } from '../utils/gridFunctions.js';
 import AgGridCheckbox from '../components/AgGridCheckbox.js';
+// import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
 
 const Management = () => {
   const { loading, user } = useAuth0();
@@ -18,27 +21,30 @@ const Management = () => {
   const [modules, setModules] = useState(AllModules);
   const [cacheBlockSize, setCacheBlockSize] = useState(100);
   const [maxBlocksInCache, setMaxBlocksInCache] = useState(10);
+  const [rowData, setRowData] = useState(null);
+  const [floatingFilter, setFloatingFilter] = useState(true);
+  const [rowSelection, setRowSelection] = useState("multiple");
+  const [rowModelType, setRowModelType] = useState('serverSide');
+  const [components, setComponent] = useState({ numericCellEditor: NumericCellEditor, });
 
-  const onGridReady = useCallback(
+  const  onGridReady = useCallback(
     (params) => {
       const { api, columnApi } = params;
       setGridApi({ api, columnApi });
 
-      const httpRequest = new XMLHttpRequest();
       const updateData = data => {
-        const datasource = createMyDataSource(data);
+        var server = new FakeServer(data);
+        var datasource = new ServerSideDatasource(server);
         params.api.setServerSideDatasource(datasource);
-      };
-
+      }
+      const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "GET",
         "http://localhost:4000/api/getAllData"
       );
       httpRequest.send();
       httpRequest.onreadystatechange = () => {
-        console.log(httpRequest.responseText)
         if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-          console.log("update area")
           updateData(JSON.parse(httpRequest.responseText));
         }
       };
@@ -51,9 +57,9 @@ const Management = () => {
       headerName: 'id', 
       field: 'id', 
       suppressSizeToFit: true, 
-      width: 50, 
+      width: 60, 
       filter: false,
-      editable: false,
+      // editable: false,
     },
     {headerName: 'first', field: 'first'},
     {headerName: 'last', field: 'last'},
@@ -63,7 +69,7 @@ const Management = () => {
       cellEditor: "agPopupSelectCellEditor",
       // cellRendererFramework: DegreeRenderer,
       cellEditorParams: {
-        values: ["bachelor", "doctor"],
+        values: ["DPM", "MD", "PHD", "PT", "DO", "LAC"],
       }
     },
     {headerName: 'entity', field: 'entity'},
@@ -71,26 +77,58 @@ const Management = () => {
       headerName: 'specialty', 
       field: 'specialty',
       cellEditor: "agPopupSelectCellEditor",
+      width: 250,
       cellEditorParams: {
-        values: ["bachelor", "doctor"],
+        values: [
+          "PRIMARY TREATING PHYSICIAN",
+          "ORTHOPEDICS",
+          "ORTHOPEDIC",
+          "SPINE SURGERY",
+          "NEUROLOGY",
+          "HAND SURGERY",
+          "PODIATRY",
+          "OCCUPATIONAL HEALTH CENTER",
+          "PODIATRIC SURGERY",
+          "PHYSICAL THERAPY",
+          "ORTHOPEDIC SURGERY",
+          "OCCUPATIONAL MEDICINE",
+          "MENTAL HEALTH",
+          "ACUPUNCTURE",
+          "PSYCHOLOGY"
+        ],
       }
     },
-    {headerName: 'dwc', field: 'dwc'},
+    {
+      headerName: 'dwc', 
+      field: 'dwc',
+      width: 150,
+    },
     {
       headerName: 'code', 
       field: 'code',
       cellEditor: "agPopupSelectCellEditor",
       cellEditorParams: {
-        values: ["bachelor", "doctor"],
+        values: [
+          "MISC", 
+          "ANC",
+          "OCCM",
+          "LAC",
+          "PTP",
+          "ORTHO",
+          "ORTHO",
+          "ANC15",
+          "DC",
+          "PMR",
+        ],
       }
     },
     {
       headerName: 'address', 
       field: 'address', 
-      cellEditor: LocationSearchInput, 
-      cellRendererFramework: LocationSearchInput,
+      // cellEditor: LocationSearchInput, 
+      cellRendererFramework: SearchInput,
       editable: false,
-      width: 150,
+      width: 250,
     },
     {headerName: 'suite', field: 'suite'},
     {headerName: 'city', field: 'city'},
@@ -102,127 +140,202 @@ const Management = () => {
     {headerName: 'longitude', field: 'longitude'},
     {headerName: 'taxid', field: 'taxid'},
     {headerName: 'statelicensenumber', field: 'statelicensenumber'},
-    {headerName: 'country', field: 'country'},
+    {headerName: 'county', field: 'county'},
     {headerName: 'workinghrs', field: 'workinghrs'},
     {headerName: 'priority', field: 'priority'},
     {headerName: 'referral', field: 'referral'},
     {
       headerName: 'mpn0589',
       field: 'mpn0589', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn0589',
+      },
     },
     {
       headerName: 'mpn0701', 
       field: 'mpn0701', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn0701',
+      },
     },
     {
       headerName: 'mpn1203', 
       field: 'mpn1203', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn1203',
+      },
     },
     {
       headerName: 'mpn2079', 
       field: 'mpn2079', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2079',
+      },
     },
     {
       headerName: 'mpn2125', 
       field: 'mpn2125', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2125',
+      },
     },
     {
       headerName: 'mpn2126', 
       field: 'mpn2126', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2126',
+      },
     },
     {
       headerName: 'mpn2128', 
       field: 'mpn2128', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2128',
+      },
     },
     {
       headerName: 'mpn2347', 
       field: 'mpn2347', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2347',
+      },
     },
     {
       headerName: 'mpn2376', 
       field: 'mpn2376', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2376',
+      },
     },
     {
       headerName: 'mpn2394', 
       field: 'mpn2394', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2394',
+      },
     },
     {
       headerName: 'mpn2451', 
       field: 'mpn2451', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2451',
+      },
     },
     {
       headerName: 'mpn2452', 
       field: 'mpn2452', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2452',
+      },
     },
     {
       headerName: 'mpn3091', 
       field: 'mpn3091', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn3091',
+      },
     },
     {
       headerName: 'mpn3095', 
       field: 'mpn3095', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn3095',
+      },
     },
     {
       headerName: 'mpn3096', 
       field: 'mpn3096', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn3096',
+      },
     },
     {
       headerName: 'mpn3097', 
       field: 'mpn3097', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn3097',
+      },
     },
     {
       headerName: 'deleted', 
       field: 'deleted', 
-      editable: true,
+      editable: false,
+      filter: false,
       cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'deleted',
+      },
     },
     {
       headerName: 'created', 
-      field: 'created'
+      field: 'created',
+      editable: false,
+      filter: false,
+      width: 200,
     },
-    {
-      headerName: 'delete_date', 
-      field: 'delete_date'
-    },
-    {
-      headerName: 'deleted_by', 
-      field: 'deleted_by'
-    },
+    // {
+    //   headerName: 'deleted_date', 
+    //   field: 'deleted_date',
+    //   editable: false,
+    //   width: 200,
+    // },
+    // {
+    //   headerName: 'deleted_by', 
+    //   field: 'deleted_by'
+    // },
     {
       headerName: 'newid', 
-      field: 'newid'
+      field: 'newid',
+      editable: true,
+      // cellEditor: "numericCellEditor",
     },
   ]);
 
@@ -232,12 +345,13 @@ const Management = () => {
     resizable: true,
     sortable: true,
     width: 100,
+    height: 100,
     undoRedoCellEditing: true,
-    undoRedoCellEditingLimit: 20
+    undoRedoCellEditingLimit: 20,
   })
 
   const [defaultColGroupDef, setDefaultColGroupDef] = useState({marryChildren: true});
-
+  
   const [columnTypes, setColumnTypes] = useState({
     numberColumn: {width: 83, filter: 'agNumberColumnFilter'},
     medalColumn: {width: 100, columnGroupShow: 'open', filter: false},
@@ -264,39 +378,20 @@ const Management = () => {
     }
   })
 
-  const [rowData, setRowData] = useState(null);
-  const [floatingFilter, setFloatingFilter] = useState(true);
-  const [rowSelection, setRowSelection] = useState("multiple");
-  const [rowModelType, setRowModelType] = useState('serverSide');
-
   if (loading || !user) {
     return <Loading />;
   }
 
 
   const onQuickFilterChanged = () => {
-    console.log("gridAPI1", gridApi)
     gridApi.api.setQuickFilter(document.getElementById("quickFilter").value);
   }
 
-  const onRowEditingStarted = (event) => {
-    console.log("onROwEditing Started", event)
-  }
 
-  const onRowEditingStopped = (event) => {
-    console.log("onROwEditing STopted*****", event)
-  }
-
-  const onCellEditingStarted = (event) => {
-    console.log("onCellEditing Started", event)
-  }
 
   const onCellEditingStopped = (event) => {
-    console.log("onCellEditing Stopped", event)
     const json = JSON.stringify(event.data);
-
     const httpRequest = new XMLHttpRequest();
-
     httpRequest.open(
       "PUT",
       "http://localhost:4000/api/updateData",
@@ -306,21 +401,79 @@ const Management = () => {
     httpRequest.send(json);
   }
 
+  const getAllData = () => {
+    let rowData = [];
+    gridApi.api.forEachNode(node => rowData.push(node.data));
+    return rowData;
+  }
+
   const addNewRow = () => {
-    const position = window.rowDataServerSide.length;
-    window.rowDataServerSide.splice(position, 0, { id: position + 1 }); //should change first parameter
-    gridApi.api.purgeServerSideCache();
+    const allData = getAllData();
+    console.log("alldata", allData);
+    const position = allData.length;
+    allData.splice(position, 0, { id: position + 1 });
+    const updateData = data => {
+      var server = new FakeServer(data);
+      var datasource = new ServerSideDatasource(server);
+      gridApi.api.setServerSideDatasource(datasource);
+    }
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open(
+      "POST",
+      "http://localhost:4000/api/addNewData",
+      true
+    );
+    httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
+    httpRequest.send();
+    httpRequest.onreadystatechange = () => {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        updateData(JSON.parse(httpRequest.responseText));
+      }
+    };
+    // gridApi.api.purgeServerSideCache();
   }
 
   const onRemoveSelected = () => {
+    const allData = getAllData()
     var selectedRows = gridApi.api.getSelectedRows();
     if(!selectedRows || selectedRows.length === 0) return;
-    console.log("selectedRows", selectedRows, window.rowDataServerSide)
     const selectedRowStart = selectedRows[0];
     const selectedLength = selectedRows.length;
-    console.log("+++++", selectedRowStart, selectedLength)
-    window.rowDataServerSide.splice(selectedRowStart.rowIndex, selectedLength);
-    gridApi.api.purgeServerSideCache();
+    let ids = [];
+    selectedRows.map((value) => {
+      value.user = user.name
+      ids.push(value);
+    })
+
+    console.log("^^^^^", allData, gridApi.api, window)
+        
+    const count = gridApi.api.getDisplayedRowCount();
+    for(let i = 0; i < count; i ++) {
+      const rowNode = gridApi.api.getDisplayedRowAtIndex(i)
+      if(rowNode.data.id === selectedRowStart.id) {
+        allData.splice(i, selectedLength);
+      }
+    }
+    const updateData = data => {
+      var server = new FakeServer(data);
+      var datasource = new ServerSideDatasource(server);
+      gridApi.api.setServerSideDatasource(datasource);
+    }
+    const httpRequest = new XMLHttpRequest();
+    const json = JSON.stringify(ids);
+    httpRequest.open(
+      "DELETE",
+      "http://localhost:4000/api/deleteData",
+      true
+    );
+    httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
+    httpRequest.send(json);
+    httpRequest.onreadystatechange = () => {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        updateData(JSON.parse(httpRequest.responseText));
+      }
+    };
+    // gridApi.api.purgeServerSideCache();
   }
 
   return (
@@ -335,6 +488,7 @@ const Management = () => {
           id="quickFilter"
           placeholder="quick filter..."
         />
+        {/* <LocationSearchInput /> */}
       </div>
       <AgGridReact
         columnDefs={columnDefs}
@@ -350,10 +504,8 @@ const Management = () => {
         modules={modules}
         cacheBlockSize={cacheBlockSize}
         maxBlocksInCache={maxBlocksInCache}
-        onRowEditingStarted={onRowEditingStarted}
-        onRowEditingStopped={onRowEditingStopped}
-        onCellEditingStarted={onCellEditingStarted}
         onCellEditingStopped={onCellEditingStopped}
+        components={components}
       >
       </AgGridReact>
     </div>
