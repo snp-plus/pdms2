@@ -2,14 +2,28 @@ const { sql,poolPromise } = require('../database/db')
 const fs = require('fs');
 var rawdata = fs.readFileSync('./query/queries.json');
 var queries = JSON.parse(rawdata);
+const csv = require('csv-parser');
 
 class MainController {
 
     async getAllData(req , res){
       try {
-        const pool = await poolPromise
+        const pool = await poolPromise;
         const result = await pool.request()
         .query(queries.getAllData)
+        res.json(result.recordset)
+      } catch (error) {
+        res.status(500)
+        res.send(error.message)
+      }
+    }
+    async quicksearch(req , res){
+      try {
+        const value = req.body.value;
+        const query = `SELECT * FROM [dbo].[contacts] WHERE first LIKE '%${value}%' OR last LIKE '%${value}%' OR degree LIKE '%${value}%' OR entity LIKE '%${value}%' OR specialty LIKE '%${value}%' OR dwc LIKE '%${value}%' OR code LIKE '%${value}%' OR address LIKE '%${value}%' OR suite LIKE '%${value}%' OR city LIKE '%${value}%' OR state LIKE '%${value}%' OR zip LIKE '%${value}%' OR phone LIKE '%${value}%' OR fax LIKE '%${value}%' OR latitude LIKE '%${value}%' OR longitude LIKE '%${value}%' OR taxid LIKE '%${value}%' OR statelicensenumber LIKE '%${value}%' OR county LIKE '%${value}%' OR workinghrs LIKE '%${value}%' OR priority LIKE '%${value}%' OR referral LIKE '%${value}%'`;
+        const pool = await poolPromise;
+        const result = await pool.request()
+        .query(query)
         res.json(result.recordset)
       } catch (error) {
         res.status(500)
@@ -94,8 +108,9 @@ class MainController {
     async deleteData(req , res){
       try {
         if(req.body.length !== 0 ) {
+          let cnt = 0;
           const pool = await poolPromise
-          req.body.map(async value => {
+          req.body.map(async (value, index) => {
             const result = await pool.request()
             .input('id',sql.Int , value.id)
             .input('first',sql.VarChar , value.first)
@@ -142,13 +157,15 @@ class MainController {
             .input('deleted_by',sql.VarChar,value.user)
             .input('newid',sql.Int,value.newid)
             .query(queries.updateData)
-
-            const result2 = await pool.request()
-            .query(queries.getAllData)
-            res.json(result2.recordset)
-          })
-        
-        // res.json(result)
+            .then(() => {
+              cnt ++;
+            })
+            if(cnt === req.body.length) {
+              const result2 = await pool.request()
+              .query(queries.getAllData)
+              res.json(result2.recordset)
+            }
+          });
         } else {
           res.send('Please select more than one row')
         }
@@ -157,6 +174,161 @@ class MainController {
         res.send(error.message)
       }
     }
+    // async updateFromCSV(req , res){
+    //   try {
+    //     if(req.body.length !== 0 ) {
+    //       const data = req.body;
+    //       let query1 = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+    //       data.map((value, index) => {
+    //         let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+    //         if(index !== data.length - 1) query1 += row + ',';
+    //         else query1 += row + ';';
+    //       })
+          
+    //       query1 = query1.replace(/\'/gi, "\''");
+    //       query1 = query1.replace(/\"/gi, "'");
+    //       let result2;
+    //       const query = 'DELETE FROM [dbo].[contacts]';
+    //       const pool = await poolPromise
+    //       pool.request()
+    //       .query(query)
+    //       .then(() => {
+    //         pool.request()
+    //         .query(query1)
+    //         .then(async () => {
+    //           result2 = await pool.request()
+    //           .query(queries.getAllData);
+    //           res.json(result2.recordset)
+    //         })
+    //       })                  
+    //     } else {
+    //       res.send('Please select more than one row')
+    //     }
+    //   } catch (error) {
+    //     res.status(500)
+    //     res.send(error.message)
+    //   }
+    // }
+    // async addFromCSV(req , res){
+    //   try {
+    //     if(req.body.length !== 0 ) {
+    //       const data = req.body;
+    //       let query1 = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+    //       data.map((value, index) => {
+    //         let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+    //         if(index !== data.length - 1) query1 += row + ',';
+    //         else query1 += row + ';';
+    //       })
+          
+    //       query1 = query1.replace(/\'/gi, "\''");
+    //       query1 = query1.replace(/\"/gi, "'");
+    //       let result2;
+    //       const pool = await poolPromise          
+    //       pool.request()
+    //       .query(query1)
+    //       .then(async () => {
+    //         result2 = await pool.request()
+    //         .query(queries.getAllData);
+    //         res.json(result2.recordset)
+    //       })              
+    //     } else {
+    //       res.send('Please select more than one row')
+    //     }
+    //   } catch (error) {
+    //     res.status(500)
+    //     res.send(error.message)
+    //   }
+    // }
+
+    async addToDatabase(req , res){
+      try {
+        if(req.body.length !== 0 ) {
+          const data = req.body;
+          let query1 = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+          data.map((value, index) => {
+            let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+            if(index !== data.length - 1) query1 += row + ',';
+            else query1 += row + ';';
+          })
+          
+          query1 = query1.replace(/\'/gi, "\''");
+          query1 = query1.replace(/\"/gi, "'");
+          let result2;
+          const query = 'DELETE FROM [dbo].[contacts]';
+          const pool = await poolPromise
+          pool.request()
+          .query(query)
+          .then(() => {
+            pool.request()
+            .query(query1)
+            .then(async () => {
+              result2 = await pool.request()
+              .query(queries.getAllData);
+              res.json(result2.recordset)
+            })
+          })                  
+        } else {
+          res.send('Please select more than one row')
+        }
+      } catch (error) {
+        res.status(500)
+        res.send(error.message)
+      }
+    }
+    async updateDatabase(req , res){
+      try {
+        console.log("herhehehreh", req.files, req.file);        
+
+        if(req.files !== null ) {
+          const file = req.files.file;
+
+          file.mv(`${__dirname}/${file.name}`, err => {
+            if (err) {
+              console.error(err);
+              return res.status(500).send(err);
+            }
+          })
+
+          console.log(`${__dirname}/${file.name}`);
+
+          const query = 'DELETE FROM [dbo].[contacts]';
+          const pool = await poolPromise;
+          pool.request()
+          .query(query)
+
+          fs.createReadStream(`${__dirname}/${file.name}`)
+          .pipe(csv())
+          .on('data', async function(value){
+            console.log("*", value)
+            try{
+              let query1 = `INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES 
+                ("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+              query1 = query1.replace(/\'/gi, "\''");
+              query1 = query1.replace(/\"/gi, "'");
+              await pool.request().query(query1);
+            }
+            catch(err) {
+              console.error(err);
+              return res.status(500).send(err);
+            }
+          })
+          .on('end', function() {
+            const result2 = pool.request()
+            .query(queries.getAllData)
+            .then((result) => {
+              console.log("end", result);
+              res.json(result.recordset)
+            })
+          })
+        } else {
+          res.send('no file')
+        }
+      } catch (error) {
+        res.status(500)
+        res.send(error.message)
+      }
+    }
+
 }
 
 const controller = new MainController()

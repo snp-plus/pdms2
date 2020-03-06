@@ -218,3 +218,85 @@ div[col-id='address'] {
   margin: 0 0 0 3px;
   font-size: 11px;
 }
+
+.grid-button {
+  font-size: 2.5em;
+  margin-left: 5px;
+}
+
+.grid-button:hover {
+  cursor: pointer;
+}
+
+.import_export {
+  margin-right: 9px;
+  color: #42464a;
+  background: white !important;
+  border: 0 !important;
+}
+
+.add_button {
+  color: #1e81e6;
+  margin-left: 9px;
+}
+
+.delete_button {
+  color: #ec2121;
+}
+
+.global_search {
+  width: 200px;
+  font-size: 13px;
+}
+
+.management .btn.btn-secondary {
+  background-color: white !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.management .btn-group-sm {
+  border: 0 !important;
+  background-color: white;
+}
+
+.management .btn-secondary:focus {
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+.management .btn:focus {
+  box-shadow: none;
+  border: 0 !important;
+}
+
+.management .dropdown-menu.show {
+  left: -12px !important;
+  width: 80px;
+  min-width: 80px;
+}
+
+.management .dropdown-item {
+  padding: 0px !important;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.management .dropdown-item:hover {
+  color: #ec2121;
+}
+
+.csv-input {
+  visibility: hidden;
+}
+
+.importModal {
+  max-width: 80% !important;
+  height: 60% !important;
+}
+
+.modal-management{
+  height: calc(100vh - 300px);
+  min-height: 100px;
+}

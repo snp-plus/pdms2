@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 
-export default function AgGridCheckbox (props) {
-  
-  
+export default function AgGridCheckbox (props) {  
   const boolValue = props.value;
   const [isChecked, setIsChecked] = useState(boolValue);
   

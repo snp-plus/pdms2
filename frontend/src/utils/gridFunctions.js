@@ -1,4 +1,3 @@
-const $ = window.$
 export function createNewRowData() {
   let today = new Date();
   var newData = {
@@ -50,34 +49,6 @@ export function createNewRowData() {
   return newData;
 }
 
-export function printResult(res) {
-  if (res.add) {
-    res.add.forEach(function(rowNode) {
-      console.log("Added Row Node", rowNode);
-    });
-  }
-  if (res.remove) {
-    res.remove.forEach(function(rowNode) {
-      console.log("Removed Row Node", rowNode);
-    });
-  }
-  if (res.update) {
-    res.update.forEach(function(rowNode) {
-      console.log("Updated Row Node", rowNode);
-    });
-  }
-}
-
-export function createMyDataSource(data) {
-  window.rowDataServerSide = data;
-  function MyDatasource() {}
-  MyDatasource.prototype.getRows = function(params) {
-    var rowsThisPage = data.slice(params.startRow, params.endRow);
-    params.successCallback(rowsThisPage, window.rowDataServerSide.length);
-  };
-  return new MyDatasource();
-}
-
 function sortAndFilter(allOfTheData, sortModel, filterModel) {
   return sortData(sortModel, filterData(filterModel, allOfTheData));
 }
@@ -93,7 +64,7 @@ function sortData(sortModel, data) {
       var sortColModel = sortModel[k];
       var valueA = a[sortColModel.colId];
       var valueB = b[sortColModel.colId];
-      if (valueA == valueB) {
+      if (valueA === valueB) {
         continue;
       }
       var sortDirection = sortColModel.sort === "asc" ? 1 : -1;
@@ -114,10 +85,8 @@ function filterData(filterModel, data) {
     return data;
   }
   var resultOfFilter = [];
-  console.log("data", data, filterModel)
   for (var i = 0; i < data.length; i++) {
     var item = data[i];
-    console.log("adf", item, filterModel)
     if (item.first && filterModel.first && item.first.includes(filterModel.first.filter) ) {
       resultOfFilter.push(item);
       continue;
@@ -218,12 +187,7 @@ function filterData(filterModel, data) {
 export function FakeServer(allData) {
   return {
     getResponse: function(request) {
-
-      console.log("request", request)
-      console.log("asking for rows: " + request.startRow + " to " + request.endRow);
-     
       var dataAfterSortingAndFiltering = sortAndFilter(allData, request.sortModel, request.filterModel);
-
       var rowsThisPage = dataAfterSortingAndFiltering.slice(request.startRow, request.endRow);
       var lastRow = allData.length <= request.endRow ? allData.length : -1;
       return {
@@ -239,14 +203,7 @@ export function ServerSideDatasource(server) {
   return {
     getRows: function(params) {
       setTimeout(function() {
-
-        console.log(params)
-        console.log("params.request", params.request)
-
         var response = server.getResponse(params.request);
-
-        console.log("response", response)
-
         if (response.success) {
           params.successCallback(response.rows, response.lastRow);
         } else {
@@ -255,30 +212,6 @@ export function ServerSideDatasource(server) {
       }, 500);
     }
   };
-}
-
-export function getDatePicker() {
-  function Datepicker() {}
-  Datepicker.prototype.init = function(params) {
-    this.eInput = document.createElement("input");
-    this.eInput.value = params.value;
-    $(this.eInput).datepicker({ dateFormat: "dd/mm/yy" });
-  };
-  Datepicker.prototype.getGui = function() {
-    return this.eInput;
-  };
-  Datepicker.prototype.afterGuiAttached = function() {
-    this.eInput.focus();
-    this.eInput.select();
-  };
-  Datepicker.prototype.getValue = function() {
-    return this.eInput.value;
-  };
-  Datepicker.prototype.destroy = function() {};
-  Datepicker.prototype.isPopup = function() {
-    return false;
-  };
-  return Datepicker;
 }
 
 export function NumericCellEditor() {

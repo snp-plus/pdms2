@@ -9,40 +9,26 @@ import { classnames } from '../utils/helpers.js';
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      address: '',
-      errorMessage: '',
-      latitude: null,
-      longitude: null,
-      isGeocoding: false, 
-    };
+    this.state = { address: '' };
   }
 
   handleChange = address => {
-    this.setState({ 
-      address,
-      latitude: null,
-      longitude: null,
-      errorMessage: '',
-     });
+    this.setState({ address });
   };
 
   handleSelect = selected => {
     const { params, changeAddress, changeState } = this.props;
-    // this.setState({ isGeocoding: true, address: selected });
     const address = selected;
     let latitude, longitude;
     geocodeByAddress(selected)
       .then(res => getLatLng(res[0])
       )
       .then(({ lat, lng }) => {
-        // this.setState({
-          latitude = lat;
-          longitude = lng;
-          // isGeocoding: false,
-        // });
+        latitude = lat;
+        longitude = lng;
 
         const realAddress = address.split(',');
+
         params.data.address = realAddress[0];
         params.data.city = realAddress[1];
         params.data.state = realAddress[2];
@@ -61,7 +47,6 @@ class LocationSearchInput extends React.Component {
 
       })
       .catch(error => {
-        // this.setState({ isGeocoding: false });
         console.log('error', error); // eslint-disable-line no-console
       });
       changeAddress();
@@ -85,13 +70,7 @@ class LocationSearchInput extends React.Component {
 
 
   render() {
-    const {
-      address,
-      errorMessage,
-      latitude,
-      longitude,
-      isGeocoding,
-    } = this.state;
+    const { address } = this.state;
 
     return (
       <div>
@@ -111,25 +90,6 @@ class LocationSearchInput extends React.Component {
               }) 
             }
 
-            // if(this.state.address.length > 0) {
-            //   $('.Demo__search-input').css ({
-            //     "width": "225px"
-            //   })
-              
-            //   $('.Demo__clear-button').css ({
-            //     'width': '25px',
-            //     'height': '32px'
-            //   })
-            // } else {
-            //   $('.Demo__search-input').css ({
-            //     "width": "250px"
-            //   });
-
-            //   $('.Demo__clear-button').css ({
-            //     'width': '0'
-            //   })
-            // }
-
             return (
               <div className="Demo__search-bar-container">
                 <div className="Demo__search-input-container">
@@ -138,16 +98,7 @@ class LocationSearchInput extends React.Component {
                       placeholder: 'Search Places...',
                       className: 'Demo__search-input',                      
                     })}
-                    // value={this.props.value}
                   />
-                  {/* {this.state.address.length > 0 && (
-                    <button
-                      className="Demo__clear-button"
-                      onClick={this.handleCloseClick}
-                    >
-                      x
-                    </button>
-                  )} */}
                 </div>
                 {suggestions.length > 0 && (
                   <div className="Demo__autocomplete-container">
@@ -172,7 +123,7 @@ class LocationSearchInput extends React.Component {
                         </div>
                       );
                       /* eslint-enable react/jsx-key */
-                    })}<div>adf</div>
+                    })}
                   </div>
                 )}
               </div>
