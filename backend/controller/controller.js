@@ -2,7 +2,7 @@ const { sql,poolPromise } = require('../database/db')
 const fs = require('fs');
 var rawdata = fs.readFileSync('./query/queries.json');
 var queries = JSON.parse(rawdata);
-const csv = require('csv-parser');
+const csv = require('csvtojson');
 
 class MainController {
 
@@ -174,101 +174,94 @@ class MainController {
         res.send(error.message)
       }
     }
-    // async updateFromCSV(req , res){
-    //   try {
-    //     if(req.body.length !== 0 ) {
-    //       const data = req.body;
-    //       let query1 = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
-    //       data.map((value, index) => {
-    //         let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
-    //         if(index !== data.length - 1) query1 += row + ',';
-    //         else query1 += row + ';';
-    //       })
-          
-    //       query1 = query1.replace(/\'/gi, "\''");
-    //       query1 = query1.replace(/\"/gi, "'");
-    //       let result2;
-    //       const query = 'DELETE FROM [dbo].[contacts]';
-    //       const pool = await poolPromise
-    //       pool.request()
-    //       .query(query)
-    //       .then(() => {
-    //         pool.request()
-    //         .query(query1)
-    //         .then(async () => {
-    //           result2 = await pool.request()
-    //           .query(queries.getAllData);
-    //           res.json(result2.recordset)
-    //         })
-    //       })                  
-    //     } else {
-    //       res.send('Please select more than one row')
-    //     }
-    //   } catch (error) {
-    //     res.status(500)
-    //     res.send(error.message)
-    //   }
-    // }
-    // async addFromCSV(req , res){
-    //   try {
-    //     if(req.body.length !== 0 ) {
-    //       const data = req.body;
-    //       let query1 = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
-    //       data.map((value, index) => {
-    //         let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
-    //         if(index !== data.length - 1) query1 += row + ',';
-    //         else query1 += row + ';';
-    //       })
-          
-    //       query1 = query1.replace(/\'/gi, "\''");
-    //       query1 = query1.replace(/\"/gi, "'");
-    //       let result2;
-    //       const pool = await poolPromise          
-    //       pool.request()
-    //       .query(query1)
-    //       .then(async () => {
-    //         result2 = await pool.request()
-    //         .query(queries.getAllData);
-    //         res.json(result2.recordset)
-    //       })              
-    //     } else {
-    //       res.send('Please select more than one row')
-    //     }
-    //   } catch (error) {
-    //     res.status(500)
-    //     res.send(error.message)
-    //   }
-    // }
 
     async addToDatabase(req , res){
       try {
-        if(req.body.length !== 0 ) {
-          const data = req.body;
-          let query1 = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
-          data.map((value, index) => {
-            let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
-            if(index !== data.length - 1) query1 += row + ',';
-            else query1 += row + ';';
+        if(req.files !== null ) {
+          const file = req.files.file;
+
+          file.mv(`${__dirname}/data/${file.name}`, err => {
+            if (err) {
+              console.error(err);
+              return res.status(500).send(err);
+            }
           })
           
-          query1 = query1.replace(/\'/gi, "\''");
-          query1 = query1.replace(/\"/gi, "'");
-          let result2;
-          const query = 'DELETE FROM [dbo].[contacts]';
-          const pool = await poolPromise
-          pool.request()
-          .query(query)
-          .then(() => {
-            pool.request()
-            .query(query1)
-            .then(async () => {
-              result2 = await pool.request()
-              .query(queries.getAllData);
-              res.json(result2.recordset)
+          const pool = await poolPromise;
+
+          const ext = file.name.split('.').pop();
+
+          if(ext === "csv") {
+            csv()
+            .fromFile(`${__dirname}/data/${file.name}`)
+            .then(json => {
+              let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+              json.map((value, index) => {
+                let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+                if(index !== json.length - 1) insertQuery += row + ',';
+                else insertQuery += row + ';';
+              });
+
+              insertQuery = insertQuery.replace(/\'/gi, "\''");
+              insertQuery = insertQuery.replace(/\"/gi, "'");
+
+              pool.request()
+              .query(insertQuery)
+              .then(async () => {
+                const result2 = await pool.request()
+                .query(queries.getAllData);
+                res.json(result2.recordset)
+              })
             })
-          })                  
+          }
+          
+          if(ext === "txt") {
+            fs.readFile(`${__dirname}/data/${file.name}`,"utf8", function(err, data){
+              var rows = data.split("\r\n");
+              var json = [];
+              var keys = [];
+          
+              rows.forEach((value, index) => {
+                if(index < 1){    // get the keys from the first row in the tab space file
+                  keys = value.split("\t");
+                } else {    // put the values from the following rows into object literals
+                  const values = value.split("\t");
+                  
+                  json[index-1] = values.map((value, ind) => {
+                    return {
+                      [keys[ind]]: value
+                    }
+                  }).reduce((currentValue, previousValue) => {
+                    return {
+                      ...currentValue,
+                      ...previousValue
+                    }
+                  });
+                }
+              });
+          
+              let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+              json.pop();
+              json.map((value, index) => {
+                let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+                if(index !== json.length - 1) insertQuery += row + ',';
+                else insertQuery += row + ';';
+              });
+
+              insertQuery = insertQuery.replace(/\'/gi, "\''");
+              insertQuery = insertQuery.replace(/\"/gi, "'");
+
+              pool.request()
+              .query(insertQuery)
+              .then(async () => {
+                const result2 = await pool.request()
+                .query(queries.getAllData);
+                res.json(result2.recordset)
+              })
+            });
+          }
         } else {
-          res.send('Please select more than one row')
+          res.send('no file')
         }
       } catch (error) {
         res.status(500)
@@ -277,48 +270,93 @@ class MainController {
     }
     async updateDatabase(req , res){
       try {
-        console.log("herhehehreh", req.files, req.file);        
-
         if(req.files !== null ) {
           const file = req.files.file;
 
-          file.mv(`${__dirname}/${file.name}`, err => {
+          file.mv(`${__dirname}/data/${file.name}`, err => {
             if (err) {
               console.error(err);
               return res.status(500).send(err);
             }
           })
 
-          console.log(`${__dirname}/${file.name}`);
-
           const query = 'DELETE FROM [dbo].[contacts]';
           const pool = await poolPromise;
           pool.request()
           .query(query)
+          .then(() => {
+            const ext = file.name.split('.').pop();
+            let i = 0;
+            if(ext === "csv") {
+              csv()
+              .fromFile(`${__dirname}/data/${file.name}`)
+              .then(json => {
+                let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+                // json.pop();
+                json.map((value, index) => {
+                  let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+                  if(index !== json.length - 1) insertQuery += row + ',';
+                  else insertQuery += row + ';';
+                });
 
-          fs.createReadStream(`${__dirname}/${file.name}`)
-          .pipe(csv())
-          .on('data', async function(value){
-            console.log("*", value)
-            try{
-              let query1 = `INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES 
-                ("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
-              query1 = query1.replace(/\'/gi, "\''");
-              query1 = query1.replace(/\"/gi, "'");
-              await pool.request().query(query1);
+                insertQuery = insertQuery.replace(/\'/gi, "\''");
+                insertQuery = insertQuery.replace(/\"/gi, "'");
+
+                pool.request()
+                .query(insertQuery)
+                .then(async () => {
+                  const result2 = await pool.request()
+                  .query(queries.getAllData);
+                  res.json(result2.recordset)
+                })
+              })
             }
-            catch(err) {
-              console.error(err);
-              return res.status(500).send(err);
+            
+            if(ext === "txt") {
+              fs.readFile(`${__dirname}/data/${file.name}`,"utf8", function(err, data){
+                var rows = data.split("\r\n");
+                var json = [];
+                var keys = [];
+            
+                rows.forEach((value, index) => {
+                  if(index < 1){    // get the keys from the first row in the tab space file
+                    keys = value.split("\t");
+                  } else {    // put the values from the following rows into object literals
+                    const values = value.split("\t");
+                    
+                    json[index-1] = values.map((value, ind) => {
+                      return {
+                        [keys[ind]]: value
+                      }
+                    }).reduce((currentValue, previousValue) => {
+                      return {
+                        ...currentValue,
+                        ...previousValue
+                      }
+                    });
+                  }
+                });
+            
+                let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+                json.pop();
+                json.map((value, index) => {
+                  let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+                  if(index !== json.length - 1) insertQuery += row + ',';
+                  else insertQuery += row + ';';
+                });
+
+                insertQuery = insertQuery.replace(/\'/gi, "\''");
+                insertQuery = insertQuery.replace(/\"/gi, "'");
+
+                pool.request()
+                .query(insertQuery)
+                .then(async () => {
+                  const result2 = await pool.request()
+                  .query(queries.getAllData);
+                  res.json(result2.recordset)
+                })
+              });
             }
-          })
-          .on('end', function() {
-            const result2 = pool.request()
-            .query(queries.getAllData)
-            .then((result) => {
-              console.log("end", result);
-              res.json(result.recordset)
-            })
           })
         } else {
           res.send('no file')
@@ -328,7 +366,6 @@ class MainController {
         res.send(error.message)
       }
     }
-
 }
 
 const controller = new MainController()
