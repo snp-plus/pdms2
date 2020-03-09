@@ -2,7 +2,6 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import Loading from "./components/Loading";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import Management from "./views/Management";
 import { useAuth0 } from "./react-auth0-spa";
 import history from "./utils/history";
@@ -23,7 +22,7 @@ const App = () => {
   return (
     <Router history={history}>
       <div id="app" className="d-flex flex-column h-100">
-        <NavBar />
+        {isAuthenticated? <NavBar />: ''}
         <div>
           <Switch>
             <Route 
@@ -32,13 +31,8 @@ const App = () => {
                 else return <Management />
               }}
             />
-
-            {/* // <Route exact path="/">
-            //   {!isAuthenticated ? loginWithRedirect() : <Management />}
-            // </Route> */}
           </Switch>
         </div>
-        {isAuthenticated? '' : <Footer />}
       </div>
     </Router>
   );

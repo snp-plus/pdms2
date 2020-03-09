@@ -40,7 +40,7 @@
 }
 
 .management {
-  height: calc(100vh - 145px);
+  height: calc(100vh - 150px);
   width: 100%;
   padding: 0 1px;
 }
@@ -292,11 +292,21 @@ div[col-id='address'] {
 }
 
 .importModal {
-  max-width: 80% !important;
+  width: 40% !important;
   height: 60% !important;
 }
 
-.modal-management{
+/* .modal-management{
   height: calc(100vh - 300px);
   min-height: 100px;
+} */
+
+.choosed_file {
+  margin-top: 8px;
+}
+
+.alertEXT {
+  color: red;
+  margin-top: 8px;
+  font-size: 0.8em;
 }

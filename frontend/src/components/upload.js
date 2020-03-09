@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Upload = ({ setFile }) => {  
-  const [filename, setFilename] = useState('Choose file');
-
+const Upload = ({ setFile }) => {
   const handleUploadFile = (e) => {
     e.preventDefault();
     setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
   }
 
   return (
