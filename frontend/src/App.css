@@ -1,0 +1,312 @@
+.next-steps .fa-link {
+  margin-right: 5px;
+}
+
+/* Fix for use only flexbox in content area */
+.next-steps .row {
+  margin-bottom: 0;
+}
+
+.next-steps .col-md-5 {
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+  .next-steps .col-md-5 {
+    margin-bottom: 0;
+  }
+}
+
+.spinner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.footer {
+  min-height: 50px !important;
+  height: 50px;
+}
+
+.main-content {
+  height: calc(100vh - 228px);
+}
+
+.management {
+  height: calc(100vh - 150px);
+  width: 100%;
+  padding: 0 1px;
+}
+
+.ag-popup-editor > .ag-cell-edit-input > .ag-cell-edit-input {
+  width: 100px !important;
+  height: 30px;
+}
+
+.location-search-input {
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom-style: hidden;
+}
+
+.location-search-input:hover {
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom-style: hidden;
+  background: #dfdfff !important;
+}
+
+.grid-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  margin-left: 28px;
+}
+
+.search-area {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.filterbox {
+  padding: 0 3px;
+}
+
+.addbutton {
+  box-shadow: 0px 1px 0px 0px #1c1b18;
+	background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+	background-color:#eae0c2;
+	border-radius:15px;
+	border:1px solid #333029;
+	display:inline-block;
+	cursor:pointer;
+	color:#505739;
+	font-family:Arial;
+	font-size:1em;
+	font-weight:bold;
+	padding:6px 8px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #ffffff;
+  margin-left: 3px;
+}
+
+.addbutton:hover {
+  background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+	background-color:#ccc2a6;
+}
+
+.addbutton:active {
+  position:relative;
+	top:1px;
+}
+
+.deletebutton {
+  box-shadow: 0px 1px 0px 0px #1c1b18;
+	background:linear-gradient(to bottom, #db613b 5%, #e0a44a 100%);
+	background-color:#db613b;
+	border-radius:15px;
+	border:2px solid #333029;
+	display:inline-block;
+	cursor:pointer;
+	color:#505739;
+	font-family:Arial;
+	font-size:1em;
+	font-weight:bold;
+	padding:6px 8px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+  margin-left: 3px;
+}
+
+.deletebutton:hover {
+  background:linear-gradient(to bottom, #e0a44a 5%, #db613b 100%);
+	background-color:#e0a44a;
+}
+
+.deletebutton:active {
+  position:relative;
+	top:1px;
+}
+
+/* .ag-cell-focus > .Demo__autocomplete-container {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
+
+.ag-cell-focus > .Demo__search-bar-container {
+  height: 100%;
+}
+
+/* div[col-id='address'].ag-cell-focus {
+  position: absolute;  
+  height: 130px;
+  border: 0;
+} */
+
+div[col-id="address"].ag-cell-focus:focus {
+  border: none;
+}
+
+.Demo__autocomplete-container {
+  /* height: 130px; */
+  overflow: visible;
+  border: solid 1px rgb(189, 195, 199);
+}
+
+div[col-id='address'] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border: none;
+}
+
+.Demo__search-input {
+  width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+}
+
+.ag-react-container {
+  height: 100%;
+}
+
+.ag-row {
+  z-index: 0;
+}
+
+.ag-row.ag-row-focus {
+  z-index: 1;
+}
+
+.customHeaderMenuButton {
+  float: left;
+  margin: 0 0 0 3px;
+}
+
+.customHeaderLabel {
+  float: left;
+  margin: 0 0 0 3px;
+}
+
+.customSortDownLabel {
+  float: left;
+  margin: 0 0 0 3px;
+}
+
+.customSortUpLabel {
+  float: left;
+  margin: 0;
+}
+
+.customSortRemoveLabel {
+  float: left;
+  margin: 0 0 0 3px;
+  font-size: 11px;
+}
+
+.grid-button {
+  font-size: 2.5em;
+  margin-left: 5px;
+}
+
+.grid-button:hover {
+  cursor: pointer;
+}
+
+.import_export {
+  margin-right: 9px;
+  color: #42464a;
+  background: white !important;
+  border: 0 !important;
+}
+
+.add_button {
+  color: #1e81e6;
+  margin-left: 9px;
+}
+
+.delete_button {
+  color: #ec2121;
+}
+
+.global_search {
+  width: 200px;
+  font-size: 13px;
+}
+
+.management .btn.btn-secondary {
+  background-color: white !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.management .btn-group-sm {
+  border: 0 !important;
+  background-color: white;
+}
+
+.management .btn-secondary:focus {
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+.management .btn:focus {
+  box-shadow: none;
+  border: 0 !important;
+}
+
+.management .dropdown-menu.show {
+  left: -12px !important;
+  width: 80px;
+  min-width: 80px;
+}
+
+.management .dropdown-item {
+  padding: 0px !important;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.management .dropdown-item:hover {
+  color: #ec2121;
+}
+
+.csv-input {
+  visibility: hidden;
+}
+
+.importModal {
+  width: 40% !important;
+  height: 60% !important;
+}
+
+/* .modal-management{
+  height: calc(100vh - 300px);
+  min-height: 100px;
+} */
+
+.choosed_file {
+  margin-top: 8px;
+}
+
+.alertEXT {
+  color: red;
+  margin-top: 8px;
+  font-size: 0.8em;
+}
