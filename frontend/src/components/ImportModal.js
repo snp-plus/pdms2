@@ -40,30 +40,31 @@ const ImportModal = (props) => {
 
   const uploadFile = async (url) => {
     const formData = new FormData();
-    console.log(file)
+    if(!file.name) return;
     const ext = file.name.split('.').pop();
     console.log(ext)
-    if(ext === 'csv' || ext === 'txt') setAlert(false);
+    if(ext === 'csv' || ext === 'txt') {
+      setAlert(false);
+      formData.append('file', file);
+
+      try {
+        const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        if(res.status === 200) updateData(parentGridApi, res.data);
+
+      } catch(err) {
+        console.log(err);
+      }
+      modalToggle();
+    }
     else {
       setAlert(true);
-      console.log("else")
       return;
     }
-    formData.append('file', file);
-
-    try {
-      const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      if(res.status === 200) updateData(parentGridApi, res.data);
-
-    } catch(err) {
-      console.log(err);
-    }
-    modalToggle();
   }
 
   return (
@@ -72,7 +73,7 @@ const ImportModal = (props) => {
       <ModalBody>
         <Button outline color="secondary" onClick={() => onClickChooseFile()}>Choose File</Button>
         <input type="text" className="choosed_file form-control" value={file.name ? file.name : ''}  placeholder={"Selected file"} disabled/>
-        {alert && <div className="alertEXT">You choosed wrong file.</div>}
+        {alert && <div className="alertEXT">You choosed a wrong file.</div>}
       </ModalBody>
       <ModalFooter>
         <Upload setFile={setFile} />
