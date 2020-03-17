@@ -65,7 +65,6 @@ export const addNewRow = (gridApi) => {
 }
 
 export const updateData = (gridApi, data) => {
-  // console.log("------", gridApi, data);
   var server = new FakeServer(data);
   var datasource = new ServerSideDatasource(server);
   gridApi.api.setServerSideDatasource(datasource);
