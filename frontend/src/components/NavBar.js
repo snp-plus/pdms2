@@ -65,14 +65,6 @@ const NavBar = () => {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem header>{user.name}</DropdownItem>
-                    {/* <DropdownItem
-                      tag={RouterNavLink}
-                      to="/profile"
-                      className="dropdown-profile"
-                      activeClassName="router-link-exact-active"
-                    >
-                      <FontAwesomeIcon icon="user" className="mr-3" /> Profile
-                    </DropdownItem> */}
                     <DropdownItem
                       id="qsLogoutBtn"
                       onClick={() => logoutWithRedirect()}
