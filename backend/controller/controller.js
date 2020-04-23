@@ -30,7 +30,6 @@ async function insertRow(value, pool, rows_cnt) {
 }
 
 class MainController {
-
     async getAllData(req , res){
       try {
         const pool = await poolPromise;
@@ -38,6 +37,34 @@ class MainController {
         .query(queries.getAllData)
         res.json(result.recordset)
       } catch (error) {
+        res.status(500)
+        res.send(error.message)
+      }
+    }
+    async filterData(req , res){
+      try {
+        const items = req.body;
+        let query = `SELECT * FROM [dbo].[contacts] `;
+        let str = '';
+        let i = 0;
+        const len = items.length;
+        for(i = 0; i < len; i ++) {
+          if(i > 0) {
+            if(items[i].checkbox) str = `AND ${items[i].item} LIKE ${items[i].value * 1} `;
+            else str = `AND ${items[i].item} LIKE '%${items[i].value}%' `;
+          }
+          else {
+            if(items[i].checkbox) str = `WHERE ${items[i].item} LIKE ${items[i].value * 1} `;
+            else str = `WHERE ${items[i].item} LIKE '%${items[i].value}%' `;
+          }
+          query += str;
+        }
+        const pool = await poolPromise;
+        const result = await pool.request()
+        .query(query)
+        res.json(result.recordset)
+      } catch (error) {
+        console.log(error)
         res.status(500)
         res.send(error.message)
       }
@@ -55,12 +82,70 @@ class MainController {
         res.send(error.message)
       }
     }
-    async addNewData(req , res){
+
+    async insertDelReason(req, res) {
       try {
-        const pool = await poolPromise
+        const value = req.body;
+        const pool = await poolPromise;
+        const query = `UPDATE [dbo].[contacts] SET del_explanation = '${value.reason}', deleted = 1 WHERE id = ${value.id}`;
+        await pool.request().query(query);
+        const result2 = await pool.request()
+        .query(queries.getAllData)
+        res.json(result2.recordset)
+
+      } catch (error) {
+        res.status(500)
+        res.send(error.message)
+      }
+    }
+
+    async addNewData(req, res){
+      try {
+        const value = req.body;
+        const pool = await poolPromise        
         const result1 = await pool.request()
+        .input('first',sql.VarChar , value.firstname)
+        .input('last',sql.VarChar,value.lastname)
+        .input('degree',sql.VarChar,value.degree)
+        .input('entity',sql.VarChar,value.entity)
+        .input('specialty',sql.VarChar,value.specialty)
+        .input('dwc',sql.VarChar,value.dwc)
+        .input('code',sql.VarChar,value.code)
+        .input('address',sql.VarChar,value.address)
+        .input('suite',sql.VarChar,value.suite)
+        .input('city',sql.VarChar,value.city)
+        .input('state',sql.VarChar,value.state)
+        .input('zip',sql.VarChar,value.zip)
+        .input('phone',sql.VarChar,value.phone)
+        .input('fax',sql.VarChar,value.fax)
+        .input('latitude',sql.VarChar,value.latitude)
+        .input('longitude',sql.VarChar,value.longitude)
+        .input('taxid',sql.VarChar,value.taxid)
+        .input('statelicensenumber',sql.VarChar,value.statelicensenumber)
+        .input('county',sql.VarChar,value.county)
+        .input('workinghrs',sql.VarChar,value.workinghrs)
+        .input('priority',sql.VarChar,value.priority)
+        .input('referral',sql.Bit,value.referral * 1)
+        .input('mpn0589',sql.Bit,value.mpn0589 * 1)
+        .input('mpn0701',sql.Bit,value.mpn0701 * 1)
+        .input('mpn1203',sql.Bit,value.mpn1203 * 1)
+        .input('mpn2079',sql.Bit,value.mpn2079 * 1)
+        .input('mpn2125',sql.Bit,value.mpn2125 * 1)
+        .input('mpn2126',sql.Bit,value.mpn2126 * 1)
+        .input('mpn2128',sql.Bit,value.mpn2128 * 1)
+        .input('mpn2347',sql.Bit,value.mpn2347 * 1)
+        .input('mpn2376',sql.Bit,value.mpn2376 * 1)
+        .input('mpn2394',sql.Bit,value.mpn2394 * 1)
+        .input('mpn2451',sql.Bit,value.mpn2451 * 1)
+        .input('mpn2452',sql.Bit,value.mpn2452 * 1)
+        .input('mpn3091',sql.Bit,value.mpn3091 * 1)
+        .input('mpn3095',sql.Bit,value.mpn3095 * 1)
+        .input('mpn3096',sql.Bit,value.mpn3096 * 1)
+        .input('mpn3097',sql.Bit,value.mpn3097 * 1)
+        .input('deleted',sql.Bit,value.deleted * 1)
         .input('created',sql.DateTime , new Date())
-        .query(queries.addNewData)
+        .input('newid',sql.VarChar,value.newid)
+        .query(queries.addNewData);
 
         const result2 = await pool.request()
         .query(queries.getAllData)
@@ -97,7 +182,7 @@ class MainController {
         .input('county',sql.VarChar,value.county)
         .input('workinghrs',sql.VarChar,value.workinghrs)
         .input('priority',sql.VarChar,value.priority)
-        .input('referral',sql.VarChar,value.referral)
+        .input('referral',sql.Bit,value.referral)
         .input('mpn0589',sql.Bit,value.mpn0589)
         .input('mpn0701',sql.Bit,value.mpn0701)
         .input('mpn1203',sql.Bit,value.mpn1203)
@@ -159,7 +244,7 @@ class MainController {
             .input('county',sql.VarChar,value.county)
             .input('workinghrs',sql.VarChar,value.workinghrs)
             .input('priority',sql.VarChar,value.priority)
-            .input('referral',sql.VarChar,value.referral)
+            .input('referral',sql.Bit,value.referral)
             .input('mpn0589',sql.Bit,value.mpn0589)
             .input('mpn0701',sql.Bit,value.mpn0701)
             .input('mpn1203',sql.Bit,value.mpn1203)

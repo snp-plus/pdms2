@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 /controller/data
 auth_config.json
+server.cert
+server.key

@@ -42,15 +42,16 @@ const ImportModal = (props) => {
     const formData = new FormData();
     if(!file.name) return;
     const ext = file.name.split('.').pop();
-    console.log(ext)
     if(ext === 'csv' || ext === 'txt') {
       setAlert(false);
       formData.append('file', file);
 
       try {
-        const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
+        const res = await axios.post(`https://pdms.snp-plus.com:4000/api/${url}`, formData, {
+        // const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'Authorization': localStorage.getItem('token')
           }
         });
 

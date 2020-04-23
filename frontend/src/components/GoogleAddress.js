@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+import { Input } from 'reactstrap';
 import { classnames } from '../utils/helpers.js';
 
 class LocationSearchInput extends React.Component {
@@ -17,7 +18,8 @@ class LocationSearchInput extends React.Component {
   };
 
   handleSelect = selected => {
-    const { params, changeAddress, changeState } = this.props;
+    const { setAddress, setCity, setState, setLatitude, setLongitude } = this.props.setFunc;
+    const { setInputAddress, changeDivState } = this.props;
     const address = selected;
     let latitude, longitude;
     geocodeByAddress(selected)
@@ -28,30 +30,18 @@ class LocationSearchInput extends React.Component {
         longitude = lng;
 
         const realAddress = address.split(',');
-
-        params.data.address = realAddress[0];
-        params.data.city = realAddress[1];
-        params.data.state = realAddress[2];
-        params.data.longitude = longitude;
-        params.data.latitude = latitude;
-        const json = JSON.stringify(params.data);
-        const httpRequest = new XMLHttpRequest();
-        httpRequest.open(
-          "PUT",
-          "https://pdms.snp-plus.com:4000/api/updateData",
-          // "http://localhost:4000/api/updateData",
-          true
-        );
-        httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
-        httpRequest.send(json);
-        params.api.purgeServerSideCache()
-
+        
+        setAddress(realAddress[0]);
+        setInputAddress(realAddress[0]);
+        setCity(realAddress[1]);
+        setState(realAddress[2]);
+        setLatitude(latitude);
+        setLongitude(longitude);
       })
       .catch(error => {
         console.log('error', error); // eslint-disable-line no-console
       });
-      changeAddress();
-      changeState();
+      changeDivState();
   };
 
   handleCloseClick = () => {
@@ -84,7 +74,7 @@ class LocationSearchInput extends React.Component {
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
             if(suggestions.length > 0) {
-              $("div[col-id='address'].ag-cell-focus").css ({
+              $("Demo__autocomplete-container").css ({
                 "position": "absolute",  
                 "height": `${30*suggestions.length}px`,
                 "border": "0"
@@ -94,9 +84,9 @@ class LocationSearchInput extends React.Component {
             return (
               <div className="Demo__search-bar-container">
                 <div className="Demo__search-input-container">
-                  <input
+                  <Input bsSize="sm"
                     {...getInputProps({
-                      placeholder: 'Search Places...',
+                      placeholder: 'Input Address ...',
                       className: 'Demo__search-input',                      
                     })}
                   />

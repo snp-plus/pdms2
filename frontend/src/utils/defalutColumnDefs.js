@@ -8,7 +8,7 @@ export const defalutColumnDefs = [
     suppressSizeToFit: true, 
     width: 60, 
     filter: false,
-    // editable: false,
+    editable: false,
   },
   {headerName: 'first', field: 'first'},
   {headerName: 'last', field: 'last'},
@@ -50,7 +50,27 @@ export const defalutColumnDefs = [
   {
     headerName: 'dwc', 
     field: 'dwc',
-    width: 150,
+    cellEditor: "agPopupSelectCellEditor",
+    width: 250,
+    cellEditorParams: {
+      values: [
+        "PRIMARY TREATING PHYSICIAN",
+        "ORTHOPEDICS",
+        "ORTHOPEDIC",
+        "SPINE SURGERY",
+        "NEUROLOGY",
+        "HAND SURGERY",
+        "PODIATRY",
+        "OCCUPATIONAL HEALTH CENTER",
+        "PODIATRIC SURGERY",
+        "PHYSICAL THERAPY",
+        "ORTHOPEDIC SURGERY",
+        "OCCUPATIONAL MEDICINE",
+        "MENTAL HEALTH",
+        "ACUPUNCTURE",
+        "PSYCHOLOGY"
+      ],
+    }
   },
   {
     headerName: 'code', 
@@ -88,10 +108,22 @@ export const defalutColumnDefs = [
   {headerName: 'longitude', field: 'longitude'},
   {headerName: 'taxid', field: 'taxid'},
   {headerName: 'statelicensenumber', field: 'statelicensenumber'},
-  {headerName: 'county', field: 'county'},
+  {
+    headerName: 'county', 
+    field: 'county'
+  },
   {headerName: 'workinghrs', field: 'workinghrs'},
   {headerName: 'priority', field: 'priority'},
-  {headerName: 'referral', field: 'referral'},
+  {
+    headerName: 'referral',
+    field: 'referral', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'referral',
+    },
+  },
   {
     headerName: 'mpn0589',
     field: 'mpn0589', 
@@ -262,13 +294,13 @@ export const defalutColumnDefs = [
       colName: 'deleted',
     },
   },
-  {
-    headerName: 'created', 
-    field: 'created',
-    editable: false,
-    filter: false,
-    width: 200,
-  },
+  // {
+  //   headerName: 'created', 
+  //   field: 'created',
+  //   editable: false,
+  //   filter: false,
+  //   width: 200,
+  // },
   // {
   //   headerName: 'deleted_date', 
   //   field: 'deleted_date',
@@ -283,6 +315,5 @@ export const defalutColumnDefs = [
     headerName: 'newid', 
     field: 'newid',
     editable: true,
-    // cellEditor: "numericCellEditor",
   },
-]
+];
