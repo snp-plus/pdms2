@@ -64,6 +64,12 @@ const Management = () => {
     setOpenFilterPanel(!openFilterPanel);
   }
   const delModalToggle = () => setDelModal(!delModal);
+
+  const priority_value = [];
+  for(let i = 1; i <= 50; i ++){
+    priority_value.push(`${i}`)
+  }
+
   const defalutColumnDefs = [
     {
       headerName: 'id', 
@@ -79,14 +85,13 @@ const Management = () => {
       headerName: 'degree', 
       field: 'degree',
       cellEditor: "agPopupSelectCellEditor",
-      // cellRendererFramework: DegreeRenderer,
       cellEditorParams: {
         values: ["DPM", "MD", "PHD", "PT", "DO", "LAC"],
       }
     },
     {headerName: 'entity', field: 'entity'},
     {
-      headerName: 'specialty', 
+      headerName: 'specialty',
       field: 'specialty',
       cellEditor: "agPopupSelectCellEditor",
       width: 250,
@@ -141,7 +146,7 @@ const Management = () => {
       cellEditor: "agPopupSelectCellEditor",
       cellEditorParams: {
         values: [
-          "MISC", 
+          "MISC",
           "ANC",
           "OCCM",
           "LAC",
@@ -162,26 +167,29 @@ const Management = () => {
       width: 250,
     },
     {headerName: 'suite', field: 'suite'},
-    {headerName: 'city', field: 'city'},
-    {headerName: 'state', field: 'state'},
-    {headerName: 'zip', field: 'zip'},
+    {headerName: 'city', field: 'city', editable: false},
+    {headerName: 'state', field: 'state', editable: false},
+    {headerName: 'zip', field: 'zip', editable: false},
     {headerName: 'phone', field: 'phone'},
     {headerName: 'fax', field: 'fax'},
     {headerName: 'latitude', field: 'latitude'},
     {headerName: 'longitude', field: 'longitude'},
     {headerName: 'taxid', field: 'taxid'},
     {headerName: 'statelicensenumber', field: 'statelicensenumber'},
-    {
-      headerName: 'county', 
-      field: 'county'
-    },
+    {headerName: 'county', field: 'county', editable: false},
     {headerName: 'workinghrs', field: 'workinghrs'},
-    {headerName: 'priority', field: 'priority'},
+    {
+      headerName: 'priority', 
+      field: 'priority',
+      cellEditor: 'agPopupSelectCellEditor',
+      cellEditorParams: {
+        values: priority_value
+      }
+    },
     {
       headerName: 'referral',
-      field: 'referral', 
-      editable: false,
-      
+      field: 'referral',
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'referral',
@@ -190,8 +198,7 @@ const Management = () => {
     {
       headerName: 'mpn0589',
       field: 'mpn0589', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn0589',
@@ -408,8 +415,8 @@ const Management = () => {
       const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "GET",
-        "https://pdms.snp-plus.com:4000/api/getAllData"
-        // "http://localhost:4000/api/getAllData"
+        // "https://api.snp-plus.com/api/getAllData"
+        "http://localhost:4000/api/getAllData"
       );
       httpRequest.setRequestHeader('Authorization', localStorage.getItem('token'));
       httpRequest.send();

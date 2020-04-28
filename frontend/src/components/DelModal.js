@@ -24,8 +24,8 @@ const DelModal = (props) => {
     const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "POST",
-        "https://pdms.snp-plus.com:4000/api/insertDelReason",
-        // "http://localhost:4000/api/insertDelReason",
+        // "https://api.snp-plus.com/api/insertDelReason",
+        "http://localhost:4000/api/insertDelReason",
         true
       );
       httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');

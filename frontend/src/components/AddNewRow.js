@@ -69,8 +69,8 @@ const AddNewRow = (props) => {
     return (
         <div className="newRowArea">
             <div className="inputArea">
-                <div><Input placeholder="firstname" bsSize="sm" value={firstname} onChange={(e) => setFirstname(e.target.value)} /></div>
-                <div><Input placeholder="lastname" bsSize="sm" value={lastname} onChange={(e) => setLastname(e.target.value)} /></div>
+                <div><Input placeholder="firstname" bsSize="sm" value={firstname} onChange={(e) => setFirstname(e.target.value.toUpperCase())} /></div>
+                <div><Input placeholder="lastname" bsSize="sm" value={lastname} onChange={(e) => setLastname(e.target.value.toUpperCase())} /></div>
                 <div>
                     <Dropdown isOpen={degreeDropdownOpen} toggle={degree_toggle} size="sm" >
                         <DropdownToggle caret style={{width: '80px'}}>
@@ -86,7 +86,7 @@ const AddNewRow = (props) => {
                         </DropdownMenu>
                     </Dropdown>
                 </div>
-                <div><Input placeholder="entity" bsSize="sm" value={entity} onChange={(e) => setEntity(e.target.value)} /></div>
+                <div><Input placeholder="entity" bsSize="sm" value={entity} onChange={(e) => setEntity(e.target.value.toUpperCase())} /></div>
                 <div style={{width: '240px'}}>
                     <Dropdown isOpen={specialtyDropdownOpen} toggle={specialty_toggle} size="sm" >
                         <DropdownToggle caret style={{width: '230px'}}>
@@ -112,7 +112,7 @@ const AddNewRow = (props) => {
                         </DropdownMenu>
                     </Dropdown>
                 </div>
-                {/* <div><Input placeholder="dwc" bsSize="sm" value={dwc} onChange={(e) => setDwc(e.target.value)} /></div> */}
+                {/* <div><Input placeholder="dwc" bsSize="sm" value={dwc} onChange={(e) => setDwc(e.target.value.toUpperCase())} /></div> */}
                 <div style={{width: '240px'}}>
                     <Dropdown isOpen={dwcDropdownOpen} toggle={dwc_toggle} size="sm" >
                         <DropdownToggle caret style={{width: '230px'}}>
@@ -165,20 +165,20 @@ const AddNewRow = (props) => {
                         setLatitude={setLatitude} 
                     />
                 </div>
-                <div><Input placeholder="suite" bsSize="sm" value={suite} onChange={(e) => setSuite(e.target.value)}/></div>
+                <div><Input placeholder="suite" bsSize="sm" value={suite} onChange={(e) => setSuite(e.target.value.toUpperCase())}/></div>
                 <div style={{width: "150px"}}><Input placeholder="city" bsSize="sm" value={city} readOnly/></div>
                 <div><Input placeholder="state" bsSize="sm" value={state} readOnly/></div>
-                <div><Input placeholder="zip" bsSize="sm" value={zip} onChange={(e) => setZip(e.target.value)} /></div>
-                <div><Input placeholder="phone" bsSize="sm" value={phone} onChange={(e) => setPhone(e.target.value)}/></div>
-                <div><Input placeholder="fax" bsSize="sm" value={fax} onChange={(e) => setFax(e.target.value)}/></div>
+                <div><Input placeholder="zip" bsSize="sm" value={zip} onChange={(e) => setZip(e.target.value.toUpperCase())} /></div>
+                <div><Input placeholder="phone" bsSize="sm" value={phone} onChange={(e) => setPhone(e.target.value.toUpperCase())}/></div>
+                <div><Input placeholder="fax" bsSize="sm" value={fax} onChange={(e) => setFax(e.target.value.toUpperCase())}/></div>
                 <div style={{width: "100px"}}><Input placeholder="latitude" bsSize="sm" value={latitude} readOnly/></div>
                 <div style={{width: "100px"}}><Input placeholder="longitude" bsSize="sm" value={longitude} readOnly/></div>
-                <div><Input placeholder="taxid" bsSize="sm" value={taxid} onChange={(e) => setTaxid(e.target.value)}/></div>
-                <div style={{width: "130px"}}><Input placeholder="statelicensenumber" bsSize="sm" value={statelicensenumber} onChange={(e) => setStatelicensenumber(e.target.value)}/></div>
-                <div><Input placeholder="county" bsSize="sm" value={county} onChange={(e) => setCounty(e.target.value)}/></div>
-                <div><Input placeholder="workinghrs" bsSize="sm" value={workinghrs} onChange={(e) => setWorkinghrs(e.target.value)}/></div>
-                <div><Input placeholder="priority" bsSize="sm" value={priority} onChange={(e) => setPriority(e.target.value)}/></div>
-                <div><Input placeholder="newid" bsSize="sm" value={newid} onChange={(e) => setNewid(e.target.value)}/></div>
+                <div><Input placeholder="taxid" bsSize="sm" value={taxid} onChange={(e) => setTaxid(e.target.value.toUpperCase())}/></div>
+                <div style={{width: "130px"}}><Input placeholder="statelicensenumber" bsSize="sm" value={statelicensenumber} onChange={(e) => setStatelicensenumber(e.target.value.toUpperCase())}/></div>
+                <div><Input placeholder="county" bsSize="sm" value={county} onChange={(e) => setCounty(e.target.value.toUpperCase())}/></div>
+                <div><Input placeholder="workinghrs" bsSize="sm" value={workinghrs} onChange={(e) => setWorkinghrs(e.target.value.toUpperCase())}/></div>
+                <div><Input placeholder="priority" bsSize="sm" value={priority} onChange={(e) => setPriority(e.target.value.toUpperCase())}/></div>
+                <div><Input placeholder="newid" bsSize="sm" value={newid} onChange={(e) => setNewid(e.target.value.toUpperCase())}/></div>
             </div>
             <div className="checkboxArea">
                 <div className="mpn_panel">

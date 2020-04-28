@@ -21,7 +21,7 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, '/logs/access.lo
 app.use(morgan('combined', { stream: accessLogStream }))
 app.use(router)
 
-const port = 4000
+const port = 80
 
 // ---- srever config ---------
 //

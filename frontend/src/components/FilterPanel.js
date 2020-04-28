@@ -357,7 +357,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="firstname-flag" aria-label="check if this is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="firstname" bsSize="sm" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                        <Input placeholder="firstname" bsSize="sm" value={firstname} onChange={(e) => setFirstname(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -367,7 +367,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="lastname-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="lastname" bsSize="sm" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                        <Input placeholder="lastname" bsSize="sm" value={lastname} onChange={(e) => setLastname(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -399,7 +399,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="entity-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="entity" bsSize="sm" value={entity} onChange={(e) => setEntity(e.target.value)} />
+                    <Input placeholder="entity" bsSize="sm" value={entity} onChange={(e) => setEntity(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div style={{width: '270px'}}>
@@ -498,7 +498,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="address-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="address" bsSize="sm" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <Input placeholder="address" bsSize="sm" value={address} onChange={(e) => setAddress(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -508,7 +508,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="suite-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="suite" bsSize="sm" value={suite} onChange={(e) => setSuite(e.target.value)} />
+                    <Input placeholder="suite" bsSize="sm" value={suite} onChange={(e) => setSuite(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div  style={{width: "170px"}}>
@@ -518,7 +518,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="city-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="city" bsSize="sm" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <Input placeholder="city" bsSize="sm" value={city} onChange={(e) => setCity(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -528,7 +528,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="state-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="state" bsSize="sm" value={state} onChange={(e) => setState(e.target.value)} />
+                    <Input placeholder="state" bsSize="sm" value={state} onChange={(e) => setState(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -538,7 +538,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="zip-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="zip" bsSize="sm" value={zip} onChange={(e) => setZip(e.target.value)} />
+                    <Input placeholder="zip" bsSize="sm" value={zip} onChange={(e) => setZip(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -548,7 +548,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="phone-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="phone" bsSize="sm" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <Input placeholder="phone" bsSize="sm" value={phone} onChange={(e) => setPhone(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -558,7 +558,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="fax-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="fax" bsSize="sm" value={fax} onChange={(e) => setFax(e.target.value)} />
+                    <Input placeholder="fax" bsSize="sm" value={fax} onChange={(e) => setFax(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div  style={{width: "120px"}}>
@@ -568,7 +568,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="latitude-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="latitude" bsSize="sm" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+                    <Input placeholder="latitude" bsSize="sm" value={latitude} onChange={(e) => setLatitude(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div  style={{width: "120px"}}>
@@ -578,7 +578,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="longitude-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="longitude" bsSize="sm" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
+                    <Input placeholder="longitude" bsSize="sm" value={longitude} onChange={(e) => setLongitude(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -588,7 +588,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="taxid-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="taxid" bsSize="sm" value={taxid} onChange={(e) => setTaxid(e.target.value)} />
+                    <Input placeholder="taxid" bsSize="sm" value={taxid} onChange={(e) => setTaxid(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div style={{width: "150px"}}>
@@ -598,7 +598,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="statelicensenumber-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="statelicensenumber" bsSize="sm" value={statelicensenumber} onChange={(e) => setStatelicensenumber(e.target.value)} />
+                    <Input placeholder="statelicensenumber" bsSize="sm" value={statelicensenumber} onChange={(e) => setStatelicensenumber(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -608,7 +608,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="county-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="county" bsSize="sm" value={county} onChange={(e) => setCounty(e.target.value)} />
+                    <Input placeholder="county" bsSize="sm" value={county} onChange={(e) => setCounty(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -618,7 +618,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="workinghrs-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="workinghrs" bsSize="sm" value={workinghrs} onChange={(e) => setWorkinghrs(e.target.value)} />
+                    <Input placeholder="workinghrs" bsSize="sm" value={workinghrs} onChange={(e) => setWorkinghrs(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -628,7 +628,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="priority-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="priority" bsSize="sm" value={priority} onChange={(e) => setPriority(e.target.value)} />
+                    <Input placeholder="priority" bsSize="sm" value={priority} onChange={(e) => setPriority(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>
@@ -638,7 +638,7 @@ const FilterPanel = (props) => {
                                 <Input addon type="checkbox" id="newid-flag" aria-label="check this it is filter item" />
                             </InputGroupText>
                         </InputGroupAddon>
-                    <Input placeholder="newid" bsSize="sm" value={newid} onChange={(e) => setNewid(e.target.value)} />
+                    <Input placeholder="newid" bsSize="sm" value={newid} onChange={(e) => setNewid(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
             </div>
