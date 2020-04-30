@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "SET PORT=80&&react-scripts start",
     "start_back": "cd ../backend/ && npm start",
     "start_all": "concurrently \"npm run start_front\" \"npm run start_back\"",
     "build": "react-scripts build",
