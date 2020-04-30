@@ -25,12 +25,12 @@ const port = 4000
 
 // ---- srever config ---------
 //
-// https.createServer({
-//   key: fs.readFileSync('server.key'),
-//   cert: fs.readFileSync('server.cert')
-// }, app)
-// .listen(process.env.PORT || port , (err) => {
-app.listen(process.env.PORT || port , (err) => {
+https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+}, app)
+.listen(process.env.PORT || port , (err) => {
+// app.listen(process.env.PORT || port , (err) => {
   if(err)
 console.log('Unable to start the server!')
 else
