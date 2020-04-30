@@ -415,8 +415,8 @@ const Management = () => {
       const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "GET",
-        // "https://api.snp-plus.com/api/getAllData"
-        "http://localhost:4000/api/getAllData"
+        "https://pdms.snp-plus.com:4000/api/getAllData"
+        // "http://localhost:4000/api/getAllData"
       );
       httpRequest.setRequestHeader('Authorization', localStorage.getItem('token'));
       httpRequest.send();

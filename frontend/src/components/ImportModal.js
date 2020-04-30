@@ -47,8 +47,8 @@ const ImportModal = (props) => {
       formData.append('file', file);
 
       try {
-        // const res = await axios.post(`https://api.snp-plus.com/api/${url}`, formData, {
-        const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
+        const res = await axios.post(`https://pdms.snp-plus.com:4000/api/${url}`, formData, {
+        // const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': localStorage.getItem('token')
