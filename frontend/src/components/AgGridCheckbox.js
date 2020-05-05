@@ -16,7 +16,7 @@ export default function AgGridCheckbox (props) {
       const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "PUT",
-        "https://pdms.snp-plus.com:4000/api/updateData",
+        "https://api.snp-plus.com/api/updateData",
         // "http://localhost:4000/api/updateData",
         true
       );

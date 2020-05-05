@@ -40,7 +40,7 @@ class LocationSearchInput extends React.Component {
         const httpRequest1 = new XMLHttpRequest();
         httpRequest1.open(
           "GET",
-          //"https://pdms.snp-plus.com:4000/api/insertDelReason",
+          //"https://api.snp-plus.com/api/insertDelReason",
           `https://www.zipcodeapi.com/rest/PJ7Ha3OkOoK18zRDI37edh6Lwmz5LdNkwCDymlCgNHNWQPuVjE6CMqwypODh1owf/city-zips.json/${realAddress[1]}/${realAddress[2]}`,
           false
         );
@@ -64,7 +64,7 @@ class LocationSearchInput extends React.Component {
         const httpRequest = new XMLHttpRequest();
         httpRequest.open(
           "PUT",
-          "https://pdms.snp-plus.com:4000/api/updateData",
+          "https://api.snp-plus.com/api/updateData",
           // "http://localhost:4000/api/updateData",
           true
         );
