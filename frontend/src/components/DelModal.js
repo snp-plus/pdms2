@@ -10,6 +10,7 @@ import {
 import { updateData } from '../utils/gridActions';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import { dev_url, prd_url } from '../utils/url';
 
 const DelModal = (props) => {
   const {
@@ -24,8 +25,8 @@ const DelModal = (props) => {
     const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "POST",
-        "https://pdms.snp-plus.com:4000/api/insertDelReason",
-        // "http://localhost:4000/api/insertDelReason",
+        // `${prd_url}/api/insertDelReason`,
+        `${dev_url}/api/insertDelReason`,
         true
       );
       httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');

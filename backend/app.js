@@ -21,16 +21,16 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, '/logs/access.lo
 app.use(morgan('combined', { stream: accessLogStream }))
 app.use(router)
 
-const port = 4000
+const port = 443
 
 // ---- srever config ---------
 //
-https.createServer({
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
-}, app)
-.listen(process.env.PORT || port , (err) => {
-// app.listen(process.env.PORT || port , (err) => {
+// https.createServer({
+//   key: fs.readFileSync('server.key'),
+//   cert: fs.readFileSync('server.cert')
+// }, app)
+// .listen(process.env.PORT || port , (err) => {
+app.listen(process.env.PORT || port , (err) => {
   if(err)
 console.log('Unable to start the server!')
 else

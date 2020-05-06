@@ -12,6 +12,7 @@ import axios from 'axios';
 import { updateData } from '../utils/gridActions';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import { dev_url, prd_url } from '../utils/url';
 
 const ImportModal = (props) => {
   const {
@@ -47,8 +48,8 @@ const ImportModal = (props) => {
       formData.append('file', file);
 
       try {
-        const res = await axios.post(`https://pdms.snp-plus.com:4000/api/${url}`, formData, {
-        // const res = await axios.post(`http://localhost:4000/api/${url}`, formData, {
+        // const res = await axios.post(`${prd_url}/api/${url}`, formData, {
+        const res = await axios.post(`${dev_url}/api/${url}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': localStorage.getItem('token')

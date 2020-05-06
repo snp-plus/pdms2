@@ -1,4 +1,5 @@
 import { ServerSideDatasource, FakeServer } from './gridFunctions.js';
+import { prd_url, dev_url } from './url';
 
 export const onQuickFilterChanged = (gridApi, value) => {
   const json = JSON.stringify({value: value});
@@ -10,8 +11,8 @@ export const onQuickFilterChanged = (gridApi, value) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "POST",
-    "https://pdms.snp-plus.com:4000/api/quicksearch",
-    // "http://localhost:4000/api/quicksearch",
+    // `${prd_url}/api/quicksearch`,
+    `${dev_url}/api/quicksearch`,
     true
   );
   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');  
@@ -29,8 +30,8 @@ export const onCellEditingStopped = (event) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "PUT",
-    "https://pdms.snp-plus.com:4000/api/updateData",
-    // "http://localhost:4000/api/updateData",
+    // `${prd_url}/api/updateData`,
+    `${dev_url}/api/updateData`,
     true
   );
   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');  
@@ -56,7 +57,7 @@ export const getAllData = (gridApi) => {
 //   const httpRequest = new XMLHttpRequest();
 //   httpRequest.open(
 //     "POST",
-//     "https://pdms.snp-plus.com:4000/api/addNewData",
+//     "http://api.snp-plus.com/api/addNewData",
 //     true
 //   );
 //   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
@@ -79,8 +80,8 @@ export const addNewRow = (gridApi, values) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "POST",
-    "https://pdms.snp-plus.com:4000/api/addNewData",
-    // "http://localhost:4000/api/addNewData",
+    // `${prd_url}/api/addNewData`,
+    `${dev_url}/api/addNewData`,
     true
   );
   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
@@ -103,8 +104,8 @@ export const filterRows = (gridApi, values) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "POST",
-    "https://pdms.snp-plus.com:4000/api/filterData",
-    // "http://localhost:4000/api/filterData",
+    // `${prd_url}/api/filterData`,
+    `${dev_url}/api/filterData`,
     true
   );
   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
@@ -121,8 +122,8 @@ export const getAllDBData = (gridApi) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "GET",
-    "https://pdms.snp-plus.com:4000/api/getAllData"
-    // "http://localhost:4000/api/getAllData"
+    // `${prd_url}/api/getAllData`
+    `${dev_url}/api/getAllData`
   );
   httpRequest.setRequestHeader('Authorization', localStorage.getItem('token'));
   httpRequest.send();
@@ -159,8 +160,8 @@ export const onRemoveSelected = (gridApi, user) => {
   const json = JSON.stringify(ids);
   httpRequest.open(
     "DELETE",
-    "https://pdms.snp-plus.com:4000/api/deleteData",
-    // "http://localhost:4000/api/deleteData",
+    // `${prd_url}/api/deleteData`,
+    `${dev_url}/api/deleteData`,
     true
   );
   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
@@ -182,8 +183,8 @@ export const onUpdateDatebase = (gridApi, data, isUpdate) => {
   }
   const httpRequest = new XMLHttpRequest();
   const json = JSON.stringify(data);
-  const url = isUpdate ? "https://pdms.snp-plus.com:4000/api/updateFromCSV" : "http://pdms.snp-plus.com:4000/api/addFromCSV"
-  // const url = isUpdate ? "http://localhost:4000/api/updateFromCSV" : "http://localhost:4000/api/addFromCSV"
+  // const url = isUpdate ? `${prd_url}/api/updateFromCSV` : `${prd_url}/api/addFromCSV`
+  const url = isUpdate ? `${dev_url}/api/updateFromCSV` : `${dev_url}/api/addFromCSV`
   httpRequest.open(
     "POST",
     url,
