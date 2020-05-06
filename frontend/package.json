@@ -10,7 +10,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://api.snp-plus.com",
+  "proxy": "http://api.snp-plus.com",
   "secure": "false",
   "dependencies": {
     "@ag-grid-community/core": "^22.1.1",
