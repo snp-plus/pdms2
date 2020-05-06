@@ -17,6 +17,13 @@ export const Auth0Provider = ({
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
 
+    var res = document.cookie;
+    var multiple = res.split(";");
+    for(var i = 0; i < multiple.length; i++) {
+       var key = multiple[i].split("=");
+       if(key[0] === 'auth0.is.authenticated') document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
+    }
+
   useEffect(() => {
     const initAuth0 = async () => {
       const auth0FromHook = await createAuth0Client(initOptions);
@@ -89,3 +96,5 @@ export const Auth0Provider = ({
     </Auth0Context.Provider>
   );
 };
+
+

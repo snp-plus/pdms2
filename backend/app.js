@@ -6,7 +6,6 @@ const path = require('path');
 const morgan = require('morgan');
 const router = require('./routes/route');
 const fileUpload = require('express-fileupload');
-const https = require('https');
 const app = express();
 
 app.use(cors())
@@ -21,15 +20,8 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, '/logs/access.lo
 app.use(morgan('combined', { stream: accessLogStream }))
 app.use(router)
 
-const port = 443
+const port = 4000
 
-// ---- srever config ---------
-//
-// https.createServer({
-//   key: fs.readFileSync('server.key'),
-//   cert: fs.readFileSync('server.cert')
-// }, app)
-// .listen(process.env.PORT || port , (err) => {
 app.listen(process.env.PORT || port , (err) => {
   if(err)
 console.log('Unable to start the server!')
