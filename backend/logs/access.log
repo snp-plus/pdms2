@@ -2475,3 +2475,5 @@
 ::ffff:127.0.0.1 - - [10/May/2020:05:48:17 +0000] "GET /api/getAllData HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
 ::ffff:127.0.0.1 - - [10/May/2020:05:52:05 +0000] "GET /api/getAllData HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
 ::ffff:127.0.0.1 - - [10/May/2020:05:52:45 +0000] "GET /api/getAllData HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
+::ffff:127.0.0.1 - - [10/May/2020:05:56:12 +0000] "GET /api/getAllData HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
+::ffff:127.0.0.1 - - [10/May/2020:05:57:14 +0000] "GET /api/getAllData HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
