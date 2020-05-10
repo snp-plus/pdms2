@@ -7,20 +7,25 @@ import PlacesAutocomplete, {
 import { Input } from 'reactstrap';
 import { classnames } from '../utils/helpers.js';
 
+// const google = window.google;
+
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { address: '' };
+    this.autocomplete = null;
+    this.google = window.google;
   }
-
+  
   handleChange = address => {
     this.setState({ address });
   };
 
   handleSelect = selected => {
-    const { setAddress, setCity, setState, setLatitude, setLongitude } = this.props.setFunc;
+    const { setAddress, setCity, setState, setLatitude, setLongitude, setCounty, setZip } = this.props.setFunc;
     const { setInputAddress, changeDivState } = this.props;
     const address = selected;
+
     let latitude, longitude;
     geocodeByAddress(selected)
       .then(res => getLatLng(res[0])
@@ -30,13 +35,25 @@ class LocationSearchInput extends React.Component {
         longitude = lng;
 
         const realAddress = address.split(',');
-        
-        setAddress(realAddress[0]);
-        setInputAddress(realAddress[0]);
-        setCity(realAddress[1]);
-        setState(realAddress[2]);
-        setLatitude(latitude);
-        setLongitude(longitude);
+
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600 Amphitheatre Parkway, Mountain View, CA&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
+        fetch(url)
+          .then(res => res.json())
+          .then(result => {
+            if(result.status === "OK") {
+              const county = result.results[0].address_components[4].long_name.replace("County", "");
+              const zip = result.results[0].address_components[6].long_name;
+              setCounty(county);
+              setZip(zip);
+              
+              setAddress(realAddress[0].toUpperCase());
+              setInputAddress(realAddress[0].toUpperCase());
+              setCity(realAddress[1].toUpperCase());
+              setState(realAddress[2].toUpperCase());
+              setLatitude(latitude);
+              setLongitude(longitude);
+            }
+          })        
       })
       .catch(error => {
         console.log('error', error); // eslint-disable-line no-console
@@ -74,6 +91,7 @@ class LocationSearchInput extends React.Component {
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
             if(suggestions.length > 0) {
+              console.log(">>>>", suggestions, getSuggestionItemProps)
               $("Demo__autocomplete-container").css ({
                 "position": "absolute",  
                 "height": `${30*suggestions.length}px`,
@@ -87,7 +105,7 @@ class LocationSearchInput extends React.Component {
                   <Input bsSize="sm"
                     {...getInputProps({
                       placeholder: 'Input Address ...',
-                      className: 'Demo__search-input',                      
+                      className: 'Demo__search-input1',                      
                     })}
                   />
                 </div>

@@ -1,5 +1,5 @@
 import { ServerSideDatasource, FakeServer } from './gridFunctions.js';
-import { prd_url, dev_url } from './url';
+import { dev_url } from './url';
 
 export const onQuickFilterChanged = (gridApi, value) => {
   const json = JSON.stringify({value: value});
@@ -11,7 +11,6 @@ export const onQuickFilterChanged = (gridApi, value) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "POST",
-    // `${prd_url}/api/quicksearch`,
     `${dev_url}/api/quicksearch`,
     true
   );
@@ -30,7 +29,6 @@ export const onCellEditingStopped = (event) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "PUT",
-    // `${prd_url}/api/updateData`,
     `${dev_url}/api/updateData`,
     true
   );
@@ -45,31 +43,6 @@ export const getAllData = (gridApi) => {
   return rowData;
 }
 
-// export const addNewRow = (gridApi) => {
-//   const allData = getAllData(gridApi);
-//   const position = allData.length;
-//   allData.splice(position, 0, { id: position + 1 });
-//   const updateData = data => {
-//     var server = new FakeServer(data);
-//     var datasource = new ServerSideDatasource(server);
-//     gridApi.api.setServerSideDatasource(datasource);
-//   }
-//   const httpRequest = new XMLHttpRequest();
-//   httpRequest.open(
-//     "POST",
-//     "http://api.snp-plus.com/api/addNewData",
-//     true
-//   );
-//   httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
-//   httpRequest.setRequestHeader('Authorization', localStorage.getItem('token'));
-//   httpRequest.send();
-//   httpRequest.onreadystatechange = () => {
-//     if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-//       updateData(JSON.parse(httpRequest.responseText));
-//     }
-//   };
-// }
-
 export const addNewRow = (gridApi, values) => {
   const updateData = data => {
     var server = new FakeServer(data);
@@ -80,7 +53,6 @@ export const addNewRow = (gridApi, values) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "POST",
-    // `${prd_url}/api/addNewData`,
     `${dev_url}/api/addNewData`,
     true
   );
@@ -104,7 +76,6 @@ export const filterRows = (gridApi, values) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "POST",
-    // `${prd_url}/api/filterData`,
     `${dev_url}/api/filterData`,
     true
   );
@@ -122,7 +93,6 @@ export const getAllDBData = (gridApi) => {
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "GET",
-    // `${prd_url}/api/getAllData`
     `${dev_url}/api/getAllData`
   );
   httpRequest.setRequestHeader('Authorization', localStorage.getItem('token'));
@@ -160,7 +130,6 @@ export const onRemoveSelected = (gridApi, user) => {
   const json = JSON.stringify(ids);
   httpRequest.open(
     "DELETE",
-    // `${prd_url}/api/deleteData`,
     `${dev_url}/api/deleteData`,
     true
   );
@@ -183,7 +152,6 @@ export const onUpdateDatebase = (gridApi, data, isUpdate) => {
   }
   const httpRequest = new XMLHttpRequest();
   const json = JSON.stringify(data);
-  // const url = isUpdate ? `${prd_url}/api/updateFromCSV` : `${prd_url}/api/addFromCSV`
   const url = isUpdate ? `${dev_url}/api/updateFromCSV` : `${dev_url}/api/addFromCSV`
   httpRequest.open(
     "POST",

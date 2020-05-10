@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { dev_url, prd_url } from '../utils/url';
+import { dev_url } from '../utils/url';
 
 export default function AgGridCheckbox (props) {  
   const boolValue = props.value;
@@ -17,7 +17,6 @@ export default function AgGridCheckbox (props) {
       const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "PUT",
-        // `${prd_url}/api/updateData`,
         `${dev_url}/api/updateData`,
         true
       );

@@ -27,7 +27,7 @@ import {
   Collapse,
   Card,
 } from 'reactstrap';
-import { dev_url, prd_url } from '../utils/url';
+import { dev_url } from '../utils/url';
 import { AllModules } from "@ag-grid-enterprise/all-modules";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
@@ -358,8 +358,7 @@ const Management = () => {
     {
       headerName: 'deleted', 
       field: 'deleted', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'deleted',
@@ -367,13 +366,12 @@ const Management = () => {
         setDelID: setDelID
       },
     },
-    // {
-    //   headerName: 'created', 
-    //   field: 'created',
-    //   editable: false,
-    //   
-    //   width: 200,
-    // },
+    {
+      headerName: 'created', 
+      field: 'created',
+      editable: false,      
+      width: 200,
+    },
     // {
     //   headerName: 'deleted_date', 
     //   field: 'deleted_date',

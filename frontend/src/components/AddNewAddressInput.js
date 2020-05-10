@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from 'reactstrap';
 import GoogleAddress from './GoogleAddress.js';
 
-const SearchInput = (props) => {
+const AddNewAddressInput = (props) => {
 
   const [divState, setDivState] = useState(true);
   const [address, setInputAddress] = useState("");
@@ -23,4 +23,4 @@ const SearchInput = (props) => {
 
 }
 
-export default SearchInput;
+export default AddNewAddressInput;

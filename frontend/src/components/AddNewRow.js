@@ -160,7 +160,9 @@ const AddNewRow = (props) => {
                     <AddNewAddressInput 
                         setAddress={setAddress} 
                         setCity={setCity} 
-                        setState={setState} 
+                        setState={setState}
+                        setCounty={setCounty}
+                        setZip={setZip}
                         setLongitude={setLongitude} 
                         setLatitude={setLatitude} 
                     />
@@ -168,14 +170,14 @@ const AddNewRow = (props) => {
                 <div><Input placeholder="suite" bsSize="sm" value={suite} onChange={(e) => setSuite(e.target.value.toUpperCase())}/></div>
                 <div style={{width: "150px"}}><Input placeholder="city" bsSize="sm" value={city} readOnly/></div>
                 <div><Input placeholder="state" bsSize="sm" value={state} readOnly/></div>
-                <div><Input placeholder="zip" bsSize="sm" value={zip} onChange={(e) => setZip(e.target.value.toUpperCase())} /></div>
+                <div><Input placeholder="zip" bsSize="sm" value={zip} readOnly /></div> {/* onChange={(e) => setZip(e.target.value.toUpperCase())} /></div> */}
                 <div><Input placeholder="phone" bsSize="sm" value={phone} onChange={(e) => setPhone(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="fax" bsSize="sm" value={fax} onChange={(e) => setFax(e.target.value.toUpperCase())}/></div>
                 <div style={{width: "100px"}}><Input placeholder="latitude" bsSize="sm" value={latitude} readOnly/></div>
                 <div style={{width: "100px"}}><Input placeholder="longitude" bsSize="sm" value={longitude} readOnly/></div>
                 <div><Input placeholder="taxid" bsSize="sm" value={taxid} onChange={(e) => setTaxid(e.target.value.toUpperCase())}/></div>
                 <div style={{width: "130px"}}><Input placeholder="statelicensenumber" bsSize="sm" value={statelicensenumber} onChange={(e) => setStatelicensenumber(e.target.value.toUpperCase())}/></div>
-                <div><Input placeholder="county" bsSize="sm" value={county} onChange={(e) => setCounty(e.target.value.toUpperCase())}/></div>
+                <div><Input placeholder="county" bsSize="sm" value={county.toUpperCase()} readOnly/></div>
                 <div><Input placeholder="workinghrs" bsSize="sm" value={workinghrs} onChange={(e) => setWorkinghrs(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="priority" bsSize="sm" value={priority} onChange={(e) => setPriority(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="newid" bsSize="sm" value={newid} onChange={(e) => setNewid(e.target.value.toUpperCase())}/></div>

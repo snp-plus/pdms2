@@ -10,7 +10,7 @@ import {
 import { updateData } from '../utils/gridActions';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import { dev_url, prd_url } from '../utils/url';
+import { dev_url } from '../utils/url';
 
 const DelModal = (props) => {
   const {
@@ -25,7 +25,6 @@ const DelModal = (props) => {
     const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "POST",
-        // `${prd_url}/api/insertDelReason`,
         `${dev_url}/api/insertDelReason`,
         true
       );

@@ -110,6 +110,7 @@ div[col-id="address"].ag-cell-focus:focus {
   position: absolute;
   overflow: visible;
   border: solid 1px rgb(189, 195, 199);
+  z-index: 999;
 }
 
 div[col-id='address'] {
@@ -118,7 +119,11 @@ div[col-id='address'] {
   border: none;
 }
 
-.Demo__search-input {
+.Demo__search-input1 {
+  width: 250px;
+}
+
+.Demo__search-input2 {
   width: 250px;
 }
 
