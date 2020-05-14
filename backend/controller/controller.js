@@ -8,7 +8,7 @@ let cnt = 0;
 
 async function insertRow(value, pool, rows_cnt) {
   let findQuery = `SELECT * FROM [dbo].[contacts] WHERE first = "${value.first}" AND last = "${value.last}" AND degree = "${value.degree}" AND entity = "${value.entity}" AND specialty = "${value.specialty}" AND dwc = "${value.dwc}" AND code = "${value.code}" AND address = "${value.address}" AND suite = "${value.suite}" AND city = "${value.city}" AND state = "${value.state}" AND zip = "${value.zip}" AND phone = "${value.phone}" AND fax = "${value.fax}" 
-                AND latitude = "${value.latitude}" AND longitude = "${value.longitude}" AND taxid = "${value.taxid}" AND statelicensenumber = "${value.statelicensenumber}" AND county = "${value.county}" AND workinghrs = "${value.workinghrs}" AND priority = "${value.priority}" AND referral = "${value.referral}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND mpn0701 = "${value.mpn0701}" AND mpn2347 = "${value.mpn2347}" AND mpn2125 = "${value.mpn2125}" AND mpn2128 = "${value.mpn2128}" AND mpn2347 = "${value.mpn2347}" AND mpn2127 = "${value.mpn2127}" AND mpn2129 = "${value.mpn2129}" AND mpn2130 = "${value.mpn2130}" AND mpn2173 = "${value.mpn2173}" AND mpn2079 = "${value.mpn2079}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND deleted = "${value.deleted}" AND newid = "${value.newid}"`;
+                AND latitude = "${value.latitude}" AND longitude = "${value.longitude}" AND taxid = "${value.taxid}" AND statelicensenumber = "${value.statelicensenumber}" AND county = "${value.county}" AND workinghrs = "${value.workinghrs}" AND priority = "${value.priority}" AND referral = "${value.referral}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND mpn0701 = "${value.mpn0701}" AND mpn2347 = "${value.mpn2347}" AND mpn2125 = "${value.mpn2125}" AND mpn2128 = "${value.mpn2128}" AND mpn2126 = "${value.mpn2126}" AND mpn2127 = "${value.mpn2127}" AND mpn2129 = "${value.mpn2129}" AND mpn2130 = "${value.mpn2130}" AND mpn2173 = "${value.mpn2173}" AND mpn2079 = "${value.mpn2079}" AND mpn1635 = "${value.mpn1635}" AND mpn1636 = "${value.mpn1636}" AND mpn1637 = "${value.mpn1637}" AND deleted = "${value.deleted}" AND newid = "${value.newid}"`;
   findQuery = findQuery.replace(/\'/gi, "\''");
   findQuery = findQuery.replace(/\"/gi, "'");
   const popPool = await poolPromise
@@ -18,8 +18,8 @@ async function insertRow(value, pool, rows_cnt) {
     cnt ++;
     return cnt === rows_cnt;
   } else {
-    let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2347, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
-    let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.mpn0701}","${value.mpn2347}","${value.mpn2125}","${value.mpn2128}","${value.mpn2347}","${value.mpn2127}","${value.mpn2129}","${value.mpn2130}","${value.mpn2173}","${value.mpn2079}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+    let insertQuery = "INSERT INTO  [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, deleted, created, newid) VALUES ";
+    let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.mpn0701}","${value.mpn2347}","${value.mpn2125}","${value.mpn2128}","${value.mpn2126}","${value.mpn2127}","${value.mpn2129}","${value.mpn2130}","${value.mpn2173}","${value.mpn2079}","${value.mpn1635}","${value.mpn1636}","${value.mpn1637}","${value.deleted}","${value.created}", "${value.newid}")`;
     insertQuery += row;
     insertQuery = insertQuery.replace(/\'/gi, "\''");
     insertQuery = insertQuery.replace(/\"/gi, "'");
@@ -133,15 +133,15 @@ class MainController {
         .input('mpn2347',sql.Bit,value.mpn2347 * 1)
         .input('mpn2125',sql.Bit,value.mpn2125 * 1)
         .input('mpn2128',sql.Bit,value.mpn2128 * 1)
-        .input('mpn2347',sql.Bit,value.mpn2347 * 1)
+        .input('mpn2126',sql.Bit,value.mpn2126 * 1)
         .input('mpn2127',sql.Bit,value.mpn2127 * 1)
         .input('mpn2129',sql.Bit,value.mpn2129 * 1)
         .input('mpn2130',sql.Bit,value.mpn2130 * 1)
         .input('mpn2173',sql.Bit,value.mpn2173 * 1)
         .input('mpn2079',sql.Bit,value.mpn2079 * 1)
-        .input('mpn3095',sql.Bit,value.mpn3095 * 1)
-        .input('mpn3096',sql.Bit,value.mpn3096 * 1)
-        .input('mpn3097',sql.Bit,value.mpn3097 * 1)
+        .input('mpn1635',sql.Bit,value.mpn1635 * 1)
+        .input('mpn1636',sql.Bit,value.mpn1636 * 1)
+        .input('mpn1637',sql.Bit,value.mpn1637 * 1)
         .input('deleted',sql.Bit,value.deleted * 1)
         .input('created',sql.DateTime , new Date())
         .input('newid',sql.VarChar,value.newid)
@@ -190,15 +190,15 @@ class MainController {
         .input('mpn2347',sql.Bit,value.mpn2347)
         .input('mpn2125',sql.Bit,value.mpn2125)
         .input('mpn2128',sql.Bit,value.mpn2128)
-        .input('mpn2347',sql.Bit,value.mpn2347)
+        .input('mpn2126',sql.Bit,value.mpn2126)
         .input('mpn2127',sql.Bit,value.mpn2127)
         .input('mpn2129',sql.Bit,value.mpn2129)
         .input('mpn2130',sql.Bit,value.mpn2130)
         .input('mpn2173',sql.Bit,value.mpn2173)
         .input('mpn2079',sql.Bit,value.mpn2079)
-        .input('mpn3095',sql.Bit,value.mpn3095)
-        .input('mpn3096',sql.Bit,value.mpn3096)
-        .input('mpn3097',sql.Bit,value.mpn3097)
+        .input('mpn1635',sql.Bit,value.mpn1635)
+        .input('mpn1636',sql.Bit,value.mpn1636)
+        .input('mpn1637',sql.Bit,value.mpn1637)
         .input('deleted',sql.Bit,req.body.deleted)
         .input('created',sql.DateTime,req.body.created)
         .input('deleted_date',sql.DateTime,req.body.deleted_date)
@@ -252,15 +252,15 @@ class MainController {
             .input('mpn2347',sql.Bit,value.mpn2347)
             .input('mpn2125',sql.Bit,value.mpn2125)
             .input('mpn2128',sql.Bit,value.mpn2128)
-            .input('mpn2347',sql.Bit,value.mpn2347)
+            .input('mpn2126',sql.Bit,value.mpn2126)
             .input('mpn2127',sql.Bit,value.mpn2127)
             .input('mpn2129',sql.Bit,value.mpn2129)
             .input('mpn2130',sql.Bit,value.mpn2130)
             .input('mpn2173',sql.Bit,value.mpn2173)
             .input('mpn2079',sql.Bit,value.mpn2079)
-            .input('mpn3095',sql.Bit,value.mpn3095)
-            .input('mpn3096',sql.Bit,value.mpn3096)
-            .input('mpn3097',sql.Bit,value.mpn3097)
+            .input('mpn1635',sql.Bit,value.mpn1635)
+            .input('mpn1636',sql.Bit,value.mpn1636)
+            .input('mpn1637',sql.Bit,value.mpn1637)
             .input('deleted',sql.Bit,true)
             .input('created',sql.DateTime,value.created)
             .input('deleted_date',sql.DateTime,new Date())

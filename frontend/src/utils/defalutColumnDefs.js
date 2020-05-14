@@ -195,13 +195,13 @@ export const defalutColumnDefs = [
     },
   },
   {
-    headerName: 'mpn2347', 
-    field: 'mpn2347', 
+    headerName: 'mpn2126', 
+    field: 'mpn2126', 
     editable: false,
     filter: false,
     cellRendererFramework: AgGridCheckbox,
     cellRendererParams: {
-      colName: 'mpn2347',
+      colName: 'mpn2126',
     },
   },
   {
@@ -255,33 +255,33 @@ export const defalutColumnDefs = [
     },
   },
   {
-    headerName: 'mpn3095', 
-    field: 'mpn3095', 
+    headerName: 'mpn1635', 
+    field: 'mpn1635', 
     editable: false,
     filter: false,
     cellRendererFramework: AgGridCheckbox,
     cellRendererParams: {
-      colName: 'mpn3095',
+      colName: 'mpn1635',
     },
   },
   {
-    headerName: 'mpn3096', 
-    field: 'mpn3096', 
+    headerName: 'mpn1636', 
+    field: 'mpn1636', 
     editable: false,
     filter: false,
     cellRendererFramework: AgGridCheckbox,
     cellRendererParams: {
-      colName: 'mpn3096',
+      colName: 'mpn1636',
     },
   },
   {
-    headerName: 'mpn3097', 
-    field: 'mpn3097', 
+    headerName: 'mpn1637', 
+    field: 'mpn1637', 
     editable: false,
     filter: false,
     cellRendererFramework: AgGridCheckbox,
     cellRendererParams: {
-      colName: 'mpn3097',
+      colName: 'mpn1637',
     },
   },
   {

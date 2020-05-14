@@ -50,20 +50,20 @@ const AddNewRow = (props) => {
         const mpn2347 = document.getElementById("mpn2347").checked;
         const mpn2125 = document.getElementById("mpn2125").checked;
         const mpn2128 = document.getElementById("mpn2128").checked;
-        const mpn2347 = document.getElementById("mpn2347").checked;
+        const mpn2126 = document.getElementById("mpn2126").checked;
         const mpn2127 = document.getElementById("mpn2127").checked;
         const mpn2129 = document.getElementById("mpn2129").checked;
         const mpn2130 = document.getElementById("mpn2130").checked;
         const mpn2173 = document.getElementById("mpn2173").checked;
         const mpn2079 = document.getElementById("mpn2079").checked;
-        const mpn3095 = document.getElementById("mpn3095").checked;
-        const mpn3096 = document.getElementById("mpn3096").checked;
-        const mpn3097 = document.getElementById("mpn3097").checked;
+        const mpn1635 = document.getElementById("mpn1635").checked;
+        const mpn1636 = document.getElementById("mpn1636").checked;
+        const mpn1637 = document.getElementById("mpn1637").checked;
         const deleted = document.getElementById("deleted").checked;
 
         addNewRow(props.gridApi, {firstname, lastname, degree, entity, specialty, dwc, code,
             suite, address, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, newid, 
-            mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2347, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn3095, mpn3096, mpn3097, deleted});
+            mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, deleted});
     }
 
     return (
@@ -216,8 +216,8 @@ const AddNewRow = (props) => {
                     <Input className="mpn_body" id="mpn2128" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
-                    <div className="mpn_title1">mpn2347: </div>
-                    <Input className="mpn_body" id="mpn2347" type="checkbox"/>
+                    <div className="mpn_title1">mpn2126: </div>
+                    <Input className="mpn_body" id="mpn2126" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
                     <div className="mpn_title1">mpn2127: </div>
@@ -240,16 +240,16 @@ const AddNewRow = (props) => {
                     <Input className="mpn_body" id="mpn2079" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
-                    <div className="mpn_title1">mpn3095: </div>
-                    <Input className="mpn_body" id="mpn3095" type="checkbox"/>
+                    <div className="mpn_title1">mpn1635: </div>
+                    <Input className="mpn_body" id="mpn1635" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
-                    <div className="mpn_title1">mpn3096: </div>
-                    <Input className="mpn_body" id="mpn3096" type="checkbox"/>
+                    <div className="mpn_title1">mpn1636: </div>
+                    <Input className="mpn_body" id="mpn1636" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
-                    <div className="mpn_title1">mpn3097: </div>
-                    <Input className="mpn_body" id="mpn3097" type="checkbox"/>
+                    <div className="mpn_title1">mpn1637: </div>
+                    <Input className="mpn_body" id="mpn1637" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
                     <div className="mpn_title1">deleted: </div>
