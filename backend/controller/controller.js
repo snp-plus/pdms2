@@ -8,7 +8,7 @@ let cnt = 0;
 
 async function insertRow(value, pool, rows_cnt) {
   let findQuery = `SELECT * FROM [dbo].[contacts] WHERE first = "${value.first}" AND last = "${value.last}" AND degree = "${value.degree}" AND entity = "${value.entity}" AND specialty = "${value.specialty}" AND dwc = "${value.dwc}" AND code = "${value.code}" AND address = "${value.address}" AND suite = "${value.suite}" AND city = "${value.city}" AND state = "${value.state}" AND zip = "${value.zip}" AND phone = "${value.phone}" AND fax = "${value.fax}" 
-                AND latitude = "${value.latitude}" AND longitude = "${value.longitude}" AND taxid = "${value.taxid}" AND statelicensenumber = "${value.statelicensenumber}" AND county = "${value.county}" AND workinghrs = "${value.workinghrs}" AND priority = "${value.priority}" AND referral = "${value.referral}" AND mpn0589 = "${value.mpn0589}" AND mpn0701 = "${value.mpn0701}" AND mpn1203 = "${value.mpn1203}" AND mpn2079 = "${value.mpn2079}" AND mpn2125 = "${value.mpn2125}" AND mpn2126 = "${value.mpn2126}" AND mpn2128 = "${value.mpn2128}" AND mpn2347 = "${value.mpn2347}" AND mpn2376 = "${value.mpn2376}" AND mpn2394 = "${value.mpn2394}" AND mpn2451 = "${value.mpn2451}" AND mpn2452 = "${value.mpn2452}" AND mpn3091 = "${value.mpn3091}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND deleted = "${value.deleted}" AND newid = "${value.newid}"`;
+                AND latitude = "${value.latitude}" AND longitude = "${value.longitude}" AND taxid = "${value.taxid}" AND statelicensenumber = "${value.statelicensenumber}" AND county = "${value.county}" AND workinghrs = "${value.workinghrs}" AND priority = "${value.priority}" AND referral = "${value.referral}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND mpn0701 = "${value.mpn0701}" AND mpn2347 = "${value.mpn2347}" AND mpn2125 = "${value.mpn2125}" AND mpn2128 = "${value.mpn2128}" AND mpn2347 = "${value.mpn2347}" AND mpn2127 = "${value.mpn2127}" AND mpn2129 = "${value.mpn2129}" AND mpn2130 = "${value.mpn2130}" AND mpn2173 = "${value.mpn2173}" AND mpn2079 = "${value.mpn2079}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND deleted = "${value.deleted}" AND newid = "${value.newid}"`;
   findQuery = findQuery.replace(/\'/gi, "\''");
   findQuery = findQuery.replace(/\"/gi, "'");
   const popPool = await poolPromise
@@ -18,8 +18,8 @@ async function insertRow(value, pool, rows_cnt) {
     cnt ++;
     return cnt === rows_cnt;
   } else {
-    let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn0589, mpn0701, mpn1203, mpn2079, mpn2125, mpn2126, mpn2128, mpn2347, mpn2376, mpn2394, mpn2451, mpn2452, mpn3091, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
-    let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn0589}","${value.mpn0701}","${value.mpn1203}","${value.mpn2079}","${value.mpn2125}","${value.mpn2126}","${value.mpn2128}","${value.mpn2347}","${value.mpn2376}","${value.mpn2394}","${value.mpn2451}","${value.mpn2452}","${value.mpn3091}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
+    let insertQuery = "INSERT INTO [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2347, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn3095, mpn3096, mpn3097, deleted, created, newid) VALUES ";
+    let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.mpn0701}","${value.mpn2347}","${value.mpn2125}","${value.mpn2128}","${value.mpn2347}","${value.mpn2127}","${value.mpn2129}","${value.mpn2130}","${value.mpn2173}","${value.mpn2079}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.deleted}","${value.created}", "${value.newid}")`;
     insertQuery += row;
     insertQuery = insertQuery.replace(/\'/gi, "\''");
     insertQuery = insertQuery.replace(/\"/gi, "'");
@@ -126,19 +126,19 @@ class MainController {
         .input('workinghrs',sql.VarChar,value.workinghrs)
         .input('priority',sql.VarChar,value.priority)
         .input('referral',sql.Bit,value.referral * 1)
-        .input('mpn0589',sql.Bit,value.mpn0589 * 1)
+        .input('mpn3095',sql.Bit,value.mpn3095 * 1)
+        .input('mpn3096',sql.Bit,value.mpn3096 * 1)
+        .input('mpn3097',sql.Bit,value.mpn3097 * 1)
         .input('mpn0701',sql.Bit,value.mpn0701 * 1)
-        .input('mpn1203',sql.Bit,value.mpn1203 * 1)
-        .input('mpn2079',sql.Bit,value.mpn2079 * 1)
+        .input('mpn2347',sql.Bit,value.mpn2347 * 1)
         .input('mpn2125',sql.Bit,value.mpn2125 * 1)
-        .input('mpn2126',sql.Bit,value.mpn2126 * 1)
         .input('mpn2128',sql.Bit,value.mpn2128 * 1)
         .input('mpn2347',sql.Bit,value.mpn2347 * 1)
-        .input('mpn2376',sql.Bit,value.mpn2376 * 1)
-        .input('mpn2394',sql.Bit,value.mpn2394 * 1)
-        .input('mpn2451',sql.Bit,value.mpn2451 * 1)
-        .input('mpn2452',sql.Bit,value.mpn2452 * 1)
-        .input('mpn3091',sql.Bit,value.mpn3091 * 1)
+        .input('mpn2127',sql.Bit,value.mpn2127 * 1)
+        .input('mpn2129',sql.Bit,value.mpn2129 * 1)
+        .input('mpn2130',sql.Bit,value.mpn2130 * 1)
+        .input('mpn2173',sql.Bit,value.mpn2173 * 1)
+        .input('mpn2079',sql.Bit,value.mpn2079 * 1)
         .input('mpn3095',sql.Bit,value.mpn3095 * 1)
         .input('mpn3096',sql.Bit,value.mpn3096 * 1)
         .input('mpn3097',sql.Bit,value.mpn3097 * 1)
@@ -183,19 +183,19 @@ class MainController {
         .input('workinghrs',sql.VarChar,value.workinghrs)
         .input('priority',sql.VarChar,value.priority)
         .input('referral',sql.Bit,value.referral)
-        .input('mpn0589',sql.Bit,value.mpn0589)
+        .input('mpn3095',sql.Bit,value.mpn3095)
+        .input('mpn3096',sql.Bit,value.mpn3096)
+        .input('mpn3097',sql.Bit,value.mpn3097)
         .input('mpn0701',sql.Bit,value.mpn0701)
-        .input('mpn1203',sql.Bit,value.mpn1203)
-        .input('mpn2079',sql.Bit,value.mpn2079)
+        .input('mpn2347',sql.Bit,value.mpn2347)
         .input('mpn2125',sql.Bit,value.mpn2125)
-        .input('mpn2126',sql.Bit,value.mpn2126)
         .input('mpn2128',sql.Bit,value.mpn2128)
         .input('mpn2347',sql.Bit,value.mpn2347)
-        .input('mpn2376',sql.Bit,value.mpn2376)
-        .input('mpn2394',sql.Bit,value.mpn2394)
-        .input('mpn2451',sql.Bit,value.mpn2451)
-        .input('mpn2452',sql.Bit,value.mpn2452)
-        .input('mpn3091',sql.Bit,value.mpn3091)
+        .input('mpn2127',sql.Bit,value.mpn2127)
+        .input('mpn2129',sql.Bit,value.mpn2129)
+        .input('mpn2130',sql.Bit,value.mpn2130)
+        .input('mpn2173',sql.Bit,value.mpn2173)
+        .input('mpn2079',sql.Bit,value.mpn2079)
         .input('mpn3095',sql.Bit,value.mpn3095)
         .input('mpn3096',sql.Bit,value.mpn3096)
         .input('mpn3097',sql.Bit,value.mpn3097)
@@ -245,19 +245,19 @@ class MainController {
             .input('workinghrs',sql.VarChar,value.workinghrs)
             .input('priority',sql.VarChar,value.priority)
             .input('referral',sql.Bit,value.referral)
-            .input('mpn0589',sql.Bit,value.mpn0589)
+            .input('mpn3095',sql.Bit,value.mpn3095)
+            .input('mpn3096',sql.Bit,value.mpn3096)
+            .input('mpn3097',sql.Bit,value.mpn3097)
             .input('mpn0701',sql.Bit,value.mpn0701)
-            .input('mpn1203',sql.Bit,value.mpn1203)
-            .input('mpn2079',sql.Bit,value.mpn2079)
+            .input('mpn2347',sql.Bit,value.mpn2347)
             .input('mpn2125',sql.Bit,value.mpn2125)
-            .input('mpn2126',sql.Bit,value.mpn2126)
             .input('mpn2128',sql.Bit,value.mpn2128)
             .input('mpn2347',sql.Bit,value.mpn2347)
-            .input('mpn2376',sql.Bit,value.mpn2376)
-            .input('mpn2394',sql.Bit,value.mpn2394)
-            .input('mpn2451',sql.Bit,value.mpn2451)
-            .input('mpn2452',sql.Bit,value.mpn2452)
-            .input('mpn3091',sql.Bit,value.mpn3091)
+            .input('mpn2127',sql.Bit,value.mpn2127)
+            .input('mpn2129',sql.Bit,value.mpn2129)
+            .input('mpn2130',sql.Bit,value.mpn2130)
+            .input('mpn2173',sql.Bit,value.mpn2173)
+            .input('mpn2079',sql.Bit,value.mpn2079)
             .input('mpn3095',sql.Bit,value.mpn3095)
             .input('mpn3096',sql.Bit,value.mpn3096)
             .input('mpn3097',sql.Bit,value.mpn3097)
