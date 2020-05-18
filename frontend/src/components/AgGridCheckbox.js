@@ -32,7 +32,7 @@ export default function AgGridCheckbox (props) {
         type="checkbox" 
         className={props.colName==='deleted' ? "delete-grid-checkbox" : "grid-checkbox" } 
         checked={isChecked} 
-        onChange={onChanged} 
+        onChange={() => onChanged()} 
       />
     </div>
   );

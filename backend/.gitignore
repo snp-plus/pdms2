@@ -11,6 +11,8 @@
 # production
 /build
 /logs/access.log
+/controller/data
+/database/db.js
 
 # misc
 .DS_Store

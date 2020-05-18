@@ -35,21 +35,44 @@ class LocationSearchInput extends React.Component {
         longitude = lng;
 
         const realAddress = address.split(',');
-
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600 Amphitheatre Parkway, Mountain View, CA&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
+        console.log("real -->", realAddress)
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
         fetch(url)
           .then(res => res.json())
           .then(result => {
             if(result.status === "OK") {
-              const county = result.results[0].address_components[4].long_name.replace("County", "");
-              const zip = result.results[0].address_components[6].long_name;
-              setCounty(county);
-              setZip(zip);
+              console.log("*&*&*&", result.results[0])
+              result.results[0].address_components.map((val) => {
+                if(val.types[0] === 'postal_code') {
+                  const zip = val.long_name;
+                  setZip(zip);
+                }
+                if(val.types[0] === 'administrative_area_level_2') {
+                  const county = val.long_name;
+                  setCounty(county.replace("County", "").toUpperCase());
+                }
+                if(val.types[0] === 'administrative_area_level_1') {
+                  const state = val.short_name;
+                  setState(state);
+                }
+                if(val.types[0] === "locality") {
+                  const city = val.long_name;
+                  setCity(city.toUpperCase());
+                }
+                let street_number = "", route = "";
+                if(val.types[0] === "street_number") {
+                  street_number = val.long_name;
+                }
+                if(val.types[0] === "route") {
+                  route = val.long_name;
+                }
+                setAddress((street_number + route).toUpperCase());
+              })
               
               setAddress(realAddress[0].toUpperCase());
               setInputAddress(realAddress[0].toUpperCase());
-              setCity(realAddress[1].toUpperCase());
-              setState(realAddress[2].toUpperCase());
+              // setCity(realAddress[1].toUpperCase());
+              // setState(realAddress[2].toUpperCase());
               setLatitude(latitude);
               setLongitude(longitude);
             }
@@ -91,7 +114,6 @@ class LocationSearchInput extends React.Component {
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
             if(suggestions.length > 0) {
-              console.log(">>>>", suggestions, getSuggestionItemProps)
               $("Demo__autocomplete-container").css ({
                 "position": "absolute",  
                 "height": `${30*suggestions.length}px`,

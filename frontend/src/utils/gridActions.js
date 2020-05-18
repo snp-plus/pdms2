@@ -26,6 +26,7 @@ export const onQuickFilterChanged = (gridApi, value) => {
 
 export const onCellEditingStopped = (event) => {
   const json = JSON.stringify(event.data);
+  console.log("+++", event)
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "PUT",
