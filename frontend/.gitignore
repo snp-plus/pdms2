@@ -7,6 +7,7 @@
 
 package.json
 /src/auth_config.json
+/src/utils/url.js
 
 
 # testing

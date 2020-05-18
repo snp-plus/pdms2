@@ -285,6 +285,106 @@ export const defalutColumnDefs = [
     },
   },
   {
+    headerName: 'mpn2474', 
+    field: 'mpn2474', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2474',
+    },
+  },
+  {
+    headerName: 'mpn2473', 
+    field: 'mpn2473', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2473',
+    },
+  },
+  {
+    headerName: 'mpn0598', 
+    field: 'mpn0598', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn0598',
+    },
+  },
+  {
+    headerName: 'mpn2502', 
+    field: 'mpn2502', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2502',
+    },
+  },
+  {
+    headerName: 'mpn2469', 
+    field: 'mpn2469', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2469',
+    },
+  },
+  {
+    headerName: 'mpn2468', 
+    field: 'mpn2468', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2468',
+    },
+  },
+  {
+    headerName: 'mpn2376', 
+    field: 'mpn2376', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2376',
+    },
+  },
+  {
+    headerName: 'mpn2394', 
+    field: 'mpn2394', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn2394',
+    },
+  },
+  {
+    headerName: 'mpn1203', 
+    field: 'mpn1203', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn1203',
+    },
+  },
+  {
+    headerName: 'mpn3104', 
+    field: 'mpn3104', 
+    editable: false,
+    filter: false,
+    cellRendererFramework: AgGridCheckbox,
+    cellRendererParams: {
+      colName: 'mpn3104',
+    },
+  },
+  {
     headerName: 'deleted', 
     field: 'deleted', 
     editable: false,

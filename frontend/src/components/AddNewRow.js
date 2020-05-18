@@ -59,11 +59,22 @@ const AddNewRow = (props) => {
         const mpn1635 = document.getElementById("mpn1635").checked;
         const mpn1636 = document.getElementById("mpn1636").checked;
         const mpn1637 = document.getElementById("mpn1637").checked;
+        const mpn2474 = document.getElementById("mpn2474").checked;
+        const mpn2473 = document.getElementById("mpn2473").checked;
+        const mpn0598 = document.getElementById("mpn0598").checked;
+        const mpn2502 = document.getElementById("mpn2502").checked;
+        const mpn2469 = document.getElementById("mpn2469").checked;
+        const mpn2468 = document.getElementById("mpn2468").checked;
+        const mpn2376 = document.getElementById("mpn2376").checked;
+        const mpn2394 = document.getElementById("mpn2394").checked;
+        const mpn1203 = document.getElementById("mpn1203").checked;
+        const mpn3104 = document.getElementById("mpn3104").checked;
         const deleted = document.getElementById("deleted").checked;
 
         addNewRow(props.gridApi, {firstname, lastname, degree, entity, specialty, dwc, code,
             suite, address, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, newid, 
-            mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, deleted});
+            mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, 
+            mpn2474, mpn2473, mpn0598, mpn2502, mpn2469, mpn2468, mpn2376, mpn2394, mpn1203, mpn3104, deleted});
     }
 
     return (
@@ -250,6 +261,46 @@ const AddNewRow = (props) => {
                 <div className="mpn_panel">
                     <div className="mpn_title1">mpn1637: </div>
                     <Input className="mpn_body" id="mpn1637" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2474: </div>
+                    <Input className="mpn_body" id="mpn2474" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2473: </div>
+                    <Input className="mpn_body" id="mpn2473" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn0598: </div>
+                    <Input className="mpn_body" id="mpn0598" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2502: </div>
+                    <Input className="mpn_body" id="mpn2502" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2469: </div>
+                    <Input className="mpn_body" id="mpn2469" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2468: </div>
+                    <Input className="mpn_body" id="mpn2468" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2376: </div>
+                    <Input className="mpn_body" id="mpn2376" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn2394: </div>
+                    <Input className="mpn_body" id="mpn2394" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn1203: </div>
+                    <Input className="mpn_body" id="mpn1203" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className="mpn_title1">mpn3104: </div>
+                    <Input className="mpn_body" id="mpn3104" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
                     <div className="mpn_title1">deleted: </div>

@@ -56,6 +56,16 @@ const FilterPanel = (props) => {
     const [mpn1635Node, setMpn1635Node] = useState(false);
     const [mpn1636Node, setMpn1636Node] = useState(false);
     const [mpn1637Node, setMpn1637Node] = useState(false);
+    const [mpn2474Node, setMpn2474Node] = useState(false);
+    const [mpn2473Node, setMpn2473Node] = useState(false);
+    const [mpn0598Node, setMpn0598Node] = useState(false);
+    const [mpn2502Node, setMpn2502Node] = useState(false);
+    const [mpn2469Node, setMpn2469Node] = useState(false);
+    const [mpn2468Node, setMpn2468Node] = useState(false);
+    const [mpn2376Node, setMpn2376Node] = useState(false);
+    const [mpn2394Node, setMpn2394Node] = useState(false);
+    const [mpn1203Node, setMpn1203Node] = useState(false);
+    const [mpn3104Node, setMpn3104Node] = useState(false);
     const [deleteNode, setDeleteNode] = useState(false);
 
     const filterData = () => {
@@ -76,6 +86,16 @@ const FilterPanel = (props) => {
         const mpn1635 = document.getElementById("mpn1635_1").checked;
         const mpn1636 = document.getElementById("mpn1636_1").checked;
         const mpn1637 = document.getElementById("mpn1637_1").checked;
+        const mpn2474 = document.getElementById("mpn2474_1").checked;
+        const mpn2473 = document.getElementById("mpn2473_1").checked;
+        const mpn0598 = document.getElementById("mpn0598_1").checked;
+        const mpn2502 = document.getElementById("mpn2502_1").checked;
+        const mpn2469 = document.getElementById("mpn2469_1").checked;
+        const mpn2468 = document.getElementById("mpn2468_1").checked;
+        const mpn2376 = document.getElementById("mpn2376_1").checked;
+        const mpn2394 = document.getElementById("mpn2394_1").checked;
+        const mpn1203 = document.getElementById("mpn1203_1").checked;
+        const mpn3104 = document.getElementById("mpn3104_1").checked;
         const deleted = document.getElementById("deleted_1").checked;
 
         const data = [{
@@ -269,6 +289,56 @@ const FilterPanel = (props) => {
                 checkbox: true,
                 value: mpn1637
             },{
+                item: 'mpn2474',
+                seleted: mpn2474Node,
+                checkbox: true,
+                value: mpn2474
+            },{
+                item: 'mpn2473',
+                seleted: mpn2473Node,
+                checkbox: true,
+                value: mpn2473
+            },{
+                item: 'mpn0598',
+                seleted: mpn0598Node,
+                checkbox: true,
+                value: mpn0598
+            },{
+                item: 'mpn2502',
+                seleted: mpn2502Node,
+                checkbox: true,
+                value: mpn2502
+            },{
+                item: 'mpn2469',
+                seleted: mpn2469Node,
+                checkbox: true,
+                value: mpn2469
+            },{
+                item: 'mpn2468',
+                seleted: mpn2468Node,
+                checkbox: true,
+                value: mpn2468
+            },{
+                item: 'mpn2376',
+                seleted: mpn2376Node,
+                checkbox: true,
+                value: mpn2376
+            },{
+                item: 'mpn2394',
+                seleted: mpn2394Node,
+                checkbox: true,
+                value: mpn2394
+            },{
+                item: 'mpn1203',
+                seleted: mpn1203Node,
+                checkbox: true,
+                value: mpn1203
+            },{
+                item: 'mpn3104',
+                seleted: mpn3104Node,
+                checkbox: true,
+                value: mpn3104
+            },{
                 item: 'deleted',
                 seleted: deleteNode,
                 checkbox: true,
@@ -302,6 +372,16 @@ const FilterPanel = (props) => {
         setMpn1635Node(false);
         setMpn1636Node(false);
         setMpn1637Node(false);
+        setMpn2474Node(false);
+        setMpn2473Node(false);
+        setMpn0598Node(false);
+        setMpn2502Node(false);
+        setMpn2469Node(false);
+        setMpn2468Node(false);
+        setMpn2376Node(false);
+        setMpn2394Node(false);
+        setMpn1203Node(false);
+        setMpn3104Node(false);
         setDeleteNode(false);
         document.getElementById("referral_1").checked = false;
         document.getElementById("mpn3095_1").checked = false;
@@ -320,6 +400,16 @@ const FilterPanel = (props) => {
         document.getElementById("mpn1635_1").checked = false;
         document.getElementById("mpn1636_1").checked = false;
         document.getElementById("mpn1637_1").checked = false;
+        document.getElementById("mpn2474_1").checked = false;
+        document.getElementById("mpn2473_1").checked = false;
+        document.getElementById("mpn0598_1").checked = false;
+        document.getElementById("mpn2502_1").checked = false;
+        document.getElementById("mpn2469_1").checked = false;
+        document.getElementById("mpn2468_1").checked = false;
+        document.getElementById("mpn2376_1").checked = false;
+        document.getElementById("mpn2394_1").checked = false;
+        document.getElementById("mpn1203_1").checked = false;
+        document.getElementById("mpn3104_1").checked = false;
         document.getElementById("deleted_1").checked = false;
 
         document.getElementById("firstname-flag").checked = false;
@@ -711,6 +801,46 @@ const FilterPanel = (props) => {
                 <div className="mpn_panel">
                     <div className={mpn1637Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn1637Node(!mpn1637Node)}>mpn1637: </div>
                     <Input className="mpn_body" id="mpn1637_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2474Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2474Node(!mpn2474Node)}>mpn2474: </div>
+                    <Input className="mpn_body" id="mpn2474_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2473Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2473Node(!mpn2473Node)}>mpn2473: </div>
+                    <Input className="mpn_body" id="mpn2473_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn0598Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn0598Node(!mpn0598Node)}>mpn0598: </div>
+                    <Input className="mpn_body" id="mpn0598_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2502Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2502Node(!mpn2502Node)}>mpn2502: </div>
+                    <Input className="mpn_body" id="mpn2502_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2469Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2469Node(!mpn2469Node)}>mpn2469: </div>
+                    <Input className="mpn_body" id="mpn2469_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2468Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2468Node(!mpn2468Node)}>mpn2468: </div>
+                    <Input className="mpn_body" id="mpn2468_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2376Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2376Node(!mpn2376Node)}>mpn2376: </div>
+                    <Input className="mpn_body" id="mpn2376_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn2394Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn2394Node(!mpn2394Node)}>mpn2394: </div>
+                    <Input className="mpn_body" id="mpn2394_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn1203Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn1203Node(!mpn1203Node)}>mpn1203: </div>
+                    <Input className="mpn_body" id="mpn1203_1" type="checkbox"/>
+                </div>
+                <div className="mpn_panel">
+                    <div className={mpn3104Node ? "mpn_title" : "mpn_title_false"} onClick={() => setMpn3104Node(!mpn3104Node)}>mpn3104: </div>
+                    <Input className="mpn_body" id="mpn3104_1" type="checkbox"/>
                 </div>
                 <div className="mpn_panel">
                     <div className={deleteNode ? "mpn_title" : "mpn_title_false"} onClick={() => setDeleteNode(!deleteNode)}>deleted: </div>

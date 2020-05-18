@@ -3,7 +3,6 @@ import Loading from "../components/Loading";
 import { useAuth0 } from "../react-auth0-spa";
 import { AgGridReact } from 'ag-grid-react';
 import { ServerSideDatasource, NumericCellEditor, FakeServer } from '../utils/gridFunctions';
-//import { defalutColumnDefs } from '../utils/defalutColumnDefs';
 import ImportModal from '../components/ImportModal';
 import AddNewRow from '../components/AddNewRow';
 import DelModal from '../components/DelModal';
@@ -40,7 +39,6 @@ const Management = () => {
   const [cacheBlockSize] = useState(100);
   const [maxBlocksInCache] = useState(10);
   const [rowData] = useState(null);
-  // const [floatingFilter] = useState(true);
   const [rowSelection] = useState("multiple");
   const [rowModelType] = useState('serverSide');
   const [components] = useState({ numericCellEditor: NumericCellEditor, });
@@ -208,8 +206,7 @@ const Management = () => {
     {
       headerName: 'mpn3096', 
       field: 'mpn3096', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn3096',
@@ -218,8 +215,7 @@ const Management = () => {
     {
       headerName: 'mpn3097', 
       field: 'mpn3097', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn3097',
@@ -228,8 +224,7 @@ const Management = () => {
     {
       headerName: 'mpn0701', 
       field: 'mpn0701', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn0701',
@@ -238,8 +233,7 @@ const Management = () => {
     {
       headerName: 'mpn2347', 
       field: 'mpn2347', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2347',
@@ -248,8 +242,7 @@ const Management = () => {
     {
       headerName: 'mpn2125', 
       field: 'mpn2125', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2125',
@@ -258,8 +251,7 @@ const Management = () => {
     {
       headerName: 'mpn2128', 
       field: 'mpn2128', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2128',
@@ -268,8 +260,7 @@ const Management = () => {
     {
       headerName: 'mpn2126', 
       field: 'mpn2126', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2126',
@@ -278,8 +269,7 @@ const Management = () => {
     {
       headerName: 'mpn2127', 
       field: 'mpn2127', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2127',
@@ -288,8 +278,7 @@ const Management = () => {
     {
       headerName: 'mpn2129', 
       field: 'mpn2129', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2129',
@@ -298,8 +287,7 @@ const Management = () => {
     {
       headerName: 'mpn2130', 
       field: 'mpn2130', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2130',
@@ -308,8 +296,7 @@ const Management = () => {
     {
       headerName: 'mpn2173', 
       field: 'mpn2173', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2173',
@@ -318,8 +305,7 @@ const Management = () => {
     {
       headerName: 'mpn2079', 
       field: 'mpn2079', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn2079',
@@ -328,8 +314,7 @@ const Management = () => {
     {
       headerName: 'mpn1635', 
       field: 'mpn1635', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn1635',
@@ -338,8 +323,7 @@ const Management = () => {
     {
       headerName: 'mpn1636', 
       field: 'mpn1636', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn1636',
@@ -348,11 +332,100 @@ const Management = () => {
     {
       headerName: 'mpn1637', 
       field: 'mpn1637', 
-      editable: false,
-      
+      editable: false,      
       cellRendererFramework: AgGridCheckbox,
       cellRendererParams: {
         colName: 'mpn1637',
+      },
+    },
+    {
+      headerName: 'mpn2474', 
+      field: 'mpn2474', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2474',
+      },
+    },
+    {
+      headerName: 'mpn2473', 
+      field: 'mpn2473', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2473',
+      },
+    },
+    {
+      headerName: 'mpn0598', 
+      field: 'mpn0598', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn0598',
+      },
+    },
+    {
+      headerName: 'mpn2502', 
+      field: 'mpn2502', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2502',
+      },
+    },
+    {
+      headerName: 'mpn2469', 
+      field: 'mpn2469', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2469',
+      },
+    },
+    {
+      headerName: 'mpn2468', 
+      field: 'mpn2468', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2468',
+      },
+    },
+    {
+      headerName: 'mpn2376', 
+      field: 'mpn2376', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2376',
+      },
+    },
+    {
+      headerName: 'mpn2394', 
+      field: 'mpn2394', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn2394',
+      },
+    },
+    {
+      headerName: 'mpn1203', 
+      field: 'mpn1203', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn1203',
+      },
+    },
+    {
+      headerName: 'mpn3104', 
+      field: 'mpn3104', 
+      editable: false,      
+      cellRendererFramework: AgGridCheckbox,
+      cellRendererParams: {
+        colName: 'mpn3104',
       },
     },
     {
@@ -482,7 +555,6 @@ const Management = () => {
         defaultColDef={defaultColDef}
         defaultColGroupDef={defaultColGroupDef}
         columnTypes={columnTypes}
-        // floatingFilter={floatingFilter}
         rowSelection={rowSelection}
         rowModelType={rowModelType}
         onGridReady={onGridReady}
