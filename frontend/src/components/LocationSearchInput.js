@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { classnames } from '../utils/helpers.js';
 import { dev_url } from '../utils/url';
+import { DebounceInput } from 'react-debounce-input';
 
 class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class LocationSearchInput extends React.Component {
           shouldFetchSuggestions={address.length > 2}
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+            // console.log("grid address>>>>>>>>>>>")
             if(suggestions.length > 0) {
               $("div[col-id='address'].ag-cell-focus").css ({
                 "position": "absolute",  
@@ -94,7 +96,8 @@ class LocationSearchInput extends React.Component {
             return (
               <div className="Demo__search-bar-container">
                 <div className="Demo__search-input-container">
-                  <input
+                  <DebounceInput 
+                    debounceTimeout={1000}
                     {...getInputProps({
                       placeholder: 'Search Places...',
                       className: 'Demo__search-input2',                      

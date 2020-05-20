@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { Input } from 'reactstrap';
 import { classnames } from '../utils/helpers.js';
+import {DebounceInput} from 'react-debounce-input';
 
 // const google = window.google;
 
@@ -28,20 +29,18 @@ class LocationSearchInput extends React.Component {
 
     let latitude, longitude;
     geocodeByAddress(selected)
-      .then(res => getLatLng(res[0])
-      )
+      .then(res => getLatLng(res[0]))
       .then(({ lat, lng }) => {
         latitude = lat;
         longitude = lng;
 
         const realAddress = address.split(',');
-        console.log("real -->", realAddress)
+        // console.log("real -->", realAddress)
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
         fetch(url)
           .then(res => res.json())
           .then(result => {
             if(result.status === "OK") {
-              console.log("*&*&*&", result.results[0])
               result.results[0].address_components.map((val) => {
                 if(val.types[0] === 'postal_code') {
                   const zip = val.long_name;
@@ -112,8 +111,9 @@ class LocationSearchInput extends React.Component {
           onError={this.handleError}
           shouldFetchSuggestions={address.length > 2}
         >
-          {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+          {({ getInputProps, suggestions, getSuggestionItemProps }) => {            
             if(suggestions.length > 0) {
+              // console.log("add---google----------------")
               $("Demo__autocomplete-container").css ({
                 "position": "absolute",  
                 "height": `${30*suggestions.length}px`,
@@ -124,11 +124,14 @@ class LocationSearchInput extends React.Component {
             return (
               <div className="Demo__search-bar-container">
                 <div className="Demo__search-input-container">
-                  <Input bsSize="sm"
-                    {...getInputProps({
-                      placeholder: 'Input Address ...',
-                      className: 'Demo__search-input1',                      
-                    })}
+                  <DebounceInput 
+                    debounceTimeout={1000}
+                    bsSize="sm"
+                      {...getInputProps({
+                        placeholder: 'Input Address ...',
+                        className: 'Demo__search-input1',                      
+                      })}
+                    element={Input} 
                   />
                 </div>
                 {suggestions.length > 0 && (

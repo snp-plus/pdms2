@@ -15,10 +15,12 @@ const SearchInput = (props) => {
   } 
 
   if(state) {
+    // console.log("div++++++++++++++++++++++++++")
     return (
       <div className="search-input" onDoubleClick={() => changeState()}>{address}</div>
     )
   } else {
+    // console.log("location++++++++++++++++++++++++++")
     return (
       <LocationSearchInput params={props} changeAddress={() => changeAddress()} changeState={() => changeState()} />
     )

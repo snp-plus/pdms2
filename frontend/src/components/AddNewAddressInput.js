@@ -12,10 +12,12 @@ const AddNewAddressInput = (props) => {
   }
 
   if(divState) {
+    // console.log("div----->")
     return (
       <div className="search-input"><Input placeholder="Double click to search address" focus="false" onDoubleClick={() => setDivState(!divState)} bsSize="sm" value={address} onChange={onChange } /></div>
     )
   } else {
+    // console.log("add----->")
     return (
       <GoogleAddress setFunc={props} setInputAddress={setInputAddress} changeDivState={() => setDivState(!divState)} />
     )
