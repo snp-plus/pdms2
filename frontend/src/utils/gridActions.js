@@ -50,6 +50,7 @@ export const addNewRow = (gridApi, values) => {
     var datasource = new ServerSideDatasource(server);
     gridApi.api.setServerSideDatasource(datasource);
   }
+  console.log(values)
   const json = JSON.stringify(values);
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
