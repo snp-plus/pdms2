@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { Input } from 'reactstrap';
 import { classnames } from '../utils/helpers.js';
-import {DebounceInput} from 'react-debounce-input';
+import { DebounceInput } from 'react-debounce-input';
 
 // const google = window.google;
 

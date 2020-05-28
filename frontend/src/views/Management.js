@@ -17,6 +17,7 @@ import {
 } from '../utils/gridActions';
 import { MdLibraryAdd, MdDelete, MdImportExport } from 'react-icons/md';
 import { FaFilter } from 'react-icons/fa';
+import { DebounceInput } from 'react-debounce-input';
 import {  
   Input, 
   Dropdown, 
@@ -531,12 +532,14 @@ const Management = () => {
         <MdDelete className="grid-button delete_button" onClick={() => onRemoveSelected(gridApi, user)} />
         <MdLibraryAdd className="grid-button add_button" onClick={() => toggle_collapse()} />  {/* addNewRow(gridApi) */}
         <FaFilter className="grid-button filter_button" onClick={() => onFilterToggle()} />
-        <Input
+        <DebounceInput 
+          debounceTimeout={1000}
           className="filterbox global_search"
           type="text"
           onChange={(event) => onQuickFilterChanged(gridApi, event.target.value)}
           id="quickFilter"
           placeholder="global search..."
+          element={Input}
         />
       </div>
       <Collapse isOpen={collapse}>
