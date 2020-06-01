@@ -26,7 +26,6 @@ export const onQuickFilterChanged = (gridApi, value) => {
 
 export const onCellEditingStopped = (event) => {
   const json = JSON.stringify(event.data);
-  console.log("+++", event)
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
     "PUT",
@@ -49,8 +48,8 @@ export const addNewRow = (gridApi, values) => {
     var server = new FakeServer(data);
     var datasource = new ServerSideDatasource(server);
     gridApi.api.setServerSideDatasource(datasource);
+    if(localStorage.getItem('searchWord')) onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
   }
-  console.log(values)
   const json = JSON.stringify(values);
   const httpRequest = new XMLHttpRequest();
   httpRequest.open(
@@ -72,7 +71,8 @@ export const filterRows = (gridApi, values) => {
   const updateData = data => {
     var server = new FakeServer(data);
     var datasource = new ServerSideDatasource(server);
-    gridApi.api.setServerSideDatasource(datasource);
+    gridApi.api.setServerSideDatasource(datasource);    
+    if(localStorage.getItem('searchWord')) onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
   }
   const json = JSON.stringify(values);
   const httpRequest = new XMLHttpRequest();
@@ -126,6 +126,7 @@ export const onRemoveSelected = (gridApi, user) => {
     var server = new FakeServer(data);
     var datasource = new ServerSideDatasource(server);
     gridApi.api.setServerSideDatasource(datasource);
+    if(localStorage.getItem('searchWord')) onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
   }
 
   const httpRequest = new XMLHttpRequest();
@@ -151,6 +152,7 @@ export const onUpdateDatebase = (gridApi, data, isUpdate) => {
     var server = new FakeServer(data);
     var datasource = new ServerSideDatasource(server);
     gridApi.api.setServerSideDatasource(datasource);
+    if(localStorage.getItem('searchWord')) onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
   }
   const httpRequest = new XMLHttpRequest();
   const json = JSON.stringify(data);

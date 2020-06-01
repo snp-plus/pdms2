@@ -40,6 +40,66 @@ const AddNewRow = (props) => {
     const [workinghrs, setWorkinghrs] = useState('');
     const [priority, setPriority] = useState('');
     const [newid, setNewid] = useState('');
+    const [divState, setDivState] = useState(true);
+
+    const clearFilter = () => {
+        document.getElementById("referral").checked = false;
+        document.getElementById("mpn3095").checked = false;
+        document.getElementById("mpn3096").checked = false;
+        document.getElementById("mpn3097").checked = false;
+        document.getElementById("mpn0701").checked = false;
+        document.getElementById("mpn2347").checked = false;
+        document.getElementById("mpn2125").checked = false;
+        document.getElementById("mpn2128").checked = false;
+        document.getElementById("mpn2126").checked = false;
+        document.getElementById("mpn2127").checked = false;
+        document.getElementById("mpn2129").checked = false;
+        document.getElementById("mpn2130").checked = false;
+        document.getElementById("mpn2173").checked = false;
+        document.getElementById("mpn2079").checked = false;
+        document.getElementById("mpn1635").checked = false;
+        document.getElementById("mpn1636").checked = false;
+        document.getElementById("mpn1637").checked = false;
+        document.getElementById("mpn2474").checked = false;
+        document.getElementById("mpn2473").checked = false;
+        document.getElementById("mpn0598").checked = false;
+        document.getElementById("mpn2502").checked = false;
+        document.getElementById("mpn2469").checked = false;
+        document.getElementById("mpn2468").checked = false;
+        document.getElementById("mpn2376").checked = false;
+        document.getElementById("mpn2394").checked = false;
+        document.getElementById("mpn1203").checked = false;
+        document.getElementById("mpn3104").checked = false;
+        document.getElementById("deleted").checked = false;
+
+        setDegreeDropdownOpen(false);
+        setDegree("DPM");
+        setSpecialtyDropdownOpen(false);
+        setSpecialty("PRIMARY TREATING PHYSICIAN");
+        setDwcDropdownOpen(false);
+        setDwc("PRIMARY TREATING PHYSICIAN");
+        setCodeDropdownOpen(false);
+        setCode("MISC");
+        setAddress('');
+        setCity('');
+        setState('');
+        setLongitude('');
+        setLatitude('');
+        setFirstname('');
+        setLastname('');
+        setEntity('');
+        setSuite('');
+        setZip('');
+        setPhone('');
+        setFax('');
+        setTaxid('');
+        setStatelicensenumber('');
+        setCounty('');
+        setWorkinghrs('');
+        setPriority('');
+        setNewid('');
+        setDivState(true);
+    }
 
     const saveNewRow = () => {
         const referral = document.getElementById("referral").checked;
@@ -175,7 +235,9 @@ const AddNewRow = (props) => {
                         setCounty={setCounty}
                         setZip={setZip}
                         setLongitude={setLongitude} 
-                        setLatitude={setLatitude} 
+                        setLatitude={setLatitude}
+                        setDivState={setDivState}
+                        divState={divState}
                     />
                 </div>
                 <div><Input placeholder="suite" bsSize="sm" value={suite} onChange={(e) => setSuite(e.target.value.toUpperCase())}/></div>
@@ -311,6 +373,7 @@ const AddNewRow = (props) => {
                 <Input placeholder="deleted_by" /> */}
             </div>            
             <Button className="newrow-save" color="info" onClick={() => props.toggle_collapse()}><AiFillUpCircle /></Button>
+            <Button className="newrow-save" color="info" onClick={() => clearFilter()}>Clear</Button>
             <Button className="newrow-save" color="info" onClick={() => saveNewRow()}>Save</Button>
         </div>
     );
