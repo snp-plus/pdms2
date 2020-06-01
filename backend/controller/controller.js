@@ -238,6 +238,7 @@ class MainController {
     }
     async deleteData(req , res){
       try {
+        console.log("sfdgsfdgd", req.body)
         if(req.body.length !== 0 ) {
           let cnt = 0;
           const pool = await poolPromise

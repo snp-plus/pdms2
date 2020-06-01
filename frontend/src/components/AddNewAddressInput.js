@@ -3,26 +3,21 @@ import { Input } from 'reactstrap';
 import GoogleAddress from './GoogleAddress.js';
 
 const AddNewAddressInput = (props) => {
-
-  const [divState, setDivState] = useState(true);
+  const {divState, setDivState} = props;
   const [address, setInputAddress] = useState("");
 
   const onChange = () => {
-
   }
 
   if(divState) {
-    // console.log("div----->")
     return (
       <div className="search-input"><Input placeholder="Double click to search address" focus="false" onDoubleClick={() => setDivState(!divState)} bsSize="sm" value={address} onChange={onChange } /></div>
     )
   } else {
-    // console.log("add----->")
     return (
       <GoogleAddress setFunc={props} setInputAddress={setInputAddress} changeDivState={() => setDivState(!divState)} />
     )
   }
-
 }
 
 export default AddNewAddressInput;

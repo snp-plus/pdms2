@@ -8,13 +8,10 @@ import { Input } from 'reactstrap';
 import { classnames } from '../utils/helpers.js';
 import { DebounceInput } from 'react-debounce-input';
 
-// const google = window.google;
-
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { address: '' };
-    this.autocomplete = null;
     this.google = window.google;
   }
   
@@ -26,8 +23,8 @@ class LocationSearchInput extends React.Component {
     const { setAddress, setCity, setState, setLatitude, setLongitude, setCounty, setZip } = this.props.setFunc;
     const { setInputAddress, changeDivState } = this.props;
     const address = selected;
-
     let latitude, longitude;
+
     geocodeByAddress(selected)
       .then(res => getLatLng(res[0]))
       .then(({ lat, lng }) => {
@@ -35,7 +32,6 @@ class LocationSearchInput extends React.Component {
         longitude = lng;
 
         const realAddress = address.split(',');
-        // console.log("real -->", realAddress)
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
         fetch(url)
           .then(res => res.json())
@@ -66,12 +62,11 @@ class LocationSearchInput extends React.Component {
                   route = val.long_name;
                 }
                 setAddress((street_number + route).toUpperCase());
+                setInputAddress((street_number + route).toUpperCase());
               })
               
-              setAddress(realAddress[0].toUpperCase());
-              setInputAddress(realAddress[0].toUpperCase());
-              // setCity(realAddress[1].toUpperCase());
-              // setState(realAddress[2].toUpperCase());
+              // setAddress(realAddress[0].toUpperCase());
+              // setInputAddress(realAddress[0].toUpperCase());
               setLatitude(latitude);
               setLongitude(longitude);
             }

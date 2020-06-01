@@ -35,6 +35,7 @@ import './style.css';
 
 const Management = () => {
   const { loading, user } = useAuth0();
+  const [searchWord, setSearchWord] = useState('');
   const [gridApi, setGridApi] = useState();
   const [modules] = useState(AllModules);
   const [cacheBlockSize] = useState(100);
@@ -172,8 +173,8 @@ const Management = () => {
     {headerName: 'zip', field: 'zip', editable: false},
     {headerName: 'phone', field: 'phone'},
     {headerName: 'fax', field: 'fax'},
-    {headerName: 'latitude', field: 'latitude'},
-    {headerName: 'longitude', field: 'longitude'},
+    {headerName: 'latitude', field: 'latitude', editable: false},
+    {headerName: 'longitude', field: 'longitude', editable: false},
     {headerName: 'taxid', field: 'taxid'},
     {headerName: 'statelicensenumber', field: 'statelicensenumber'},
     {headerName: 'county', field: 'county', editable: false},
@@ -502,7 +503,6 @@ const Management = () => {
     []
   );
   const onExportCSV = () => {
-    // const firstDisplayedId = gridApi.api.getFirstDisplayedRow();
     const params = {
       fileName: 'csv'
     }
@@ -536,7 +536,11 @@ const Management = () => {
           debounceTimeout={1000}
           className="filterbox global_search"
           type="text"
-          onChange={(event) => onQuickFilterChanged(gridApi, event.target.value)}
+          onChange={(event) => {
+            onQuickFilterChanged(gridApi, event.target.value);
+            setSearchWord(event.target.value);
+            localStorage.setItem('searchWord', event.target.value);
+          }}
           id="quickFilter"
           placeholder="global search..."
           element={Input}
