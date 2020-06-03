@@ -355,6 +355,25 @@ const FilterPanel = (props) => {
     }
 
     const clearFilter = () => {
+        setFirstname('');
+        setLastname('');
+        setEntity('');
+        setAddress('');
+        setSuite('');
+        setCity('');
+        setState('');
+        setZip('');
+        setPhone('');
+        setFax('');
+        setLatitude('');
+        setLongitude('');
+        setTaxid('');
+        setStatelicensenumber('');
+        setCounty('');
+        setWorkinghrs('');
+        setPriority('');
+        setNewid('');
+        
         setReferralNode(false);
         setMpn3095Node(false);
         setMpn3096Node(false);
