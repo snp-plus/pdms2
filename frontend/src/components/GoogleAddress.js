@@ -36,7 +36,9 @@ class LocationSearchInput extends React.Component {
         fetch(url)
           .then(res => res.json())
           .then(result => {
-            if(result.status === "OK") {
+            if(result.status === "OK") {              
+              let street_number = "", route = "";
+
               result.results[0].address_components.map((val) => {
                 if(val.types[0] === 'postal_code') {
                   const zip = val.long_name;
@@ -54,17 +56,17 @@ class LocationSearchInput extends React.Component {
                   const city = val.long_name;
                   setCity(city.toUpperCase());
                 }
-                let street_number = "", route = "";
                 if(val.types[0] === "street_number") {
                   street_number = val.long_name;
                 }
                 if(val.types[0] === "route") {
                   route = val.long_name;
                 }
-                setAddress((street_number + route).toUpperCase());
-                setInputAddress((street_number + route).toUpperCase());
               })
-              
+
+              setAddress((street_number + " " + route).toUpperCase());
+              setInputAddress((street_number + " " + route).toUpperCase());
+              changeDivState();
               // setAddress(realAddress[0].toUpperCase());
               // setInputAddress(realAddress[0].toUpperCase());
               setLatitude(latitude);
@@ -75,7 +77,6 @@ class LocationSearchInput extends React.Component {
       .catch(error => {
         console.log('error', error); // eslint-disable-line no-console
       });
-      changeDivState();
   };
 
   handleCloseClick = () => {
@@ -108,7 +109,6 @@ class LocationSearchInput extends React.Component {
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {            
             if(suggestions.length > 0) {
-              // console.log("add---google----------------")
               $("Demo__autocomplete-container").css ({
                 "position": "absolute",  
                 "height": `${30*suggestions.length}px`,

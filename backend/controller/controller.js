@@ -103,6 +103,7 @@ class MainController {
     async addNewData(req, res){
       try {
         const value = req.body;
+        console.log(value)
         const pool = await poolPromise        
         const result1 = await pool.request()
         .input('first',sql.VarChar , value.firstname)
@@ -157,7 +158,7 @@ class MainController {
         .input('created',sql.DateTime , new Date())
         .input('newid',sql.VarChar,value.newid)
         .query(queries.addNewData);
-
+        
         const result2 = await pool.request()
         .query(queries.getAllData)
         res.json(result2.recordset)
@@ -238,7 +239,6 @@ class MainController {
     }
     async deleteData(req , res){
       try {
-        console.log("sfdgsfdgd", req.body)
         if(req.body.length !== 0 ) {
           let cnt = 0;
           const pool = await poolPromise
