@@ -25,8 +25,7 @@ class LocationSearchInput extends React.Component {
     let latitude, longitude;
 
     geocodeByAddress(selected)
-      .then(res => getLatLng(res[0])
-      )
+      .then(res => getLatLng(res[0]))
       .then(({ lat, lng }) => {
         latitude = lat;
         longitude = lng;
@@ -35,8 +34,10 @@ class LocationSearchInput extends React.Component {
         fetch(url)
         .then(res => res.json())
         .then(result => {
-          if(result.state === "OK") {
-            result.result[0].address_components.map(val => {
+          if(result.status === "OK") {         
+            let street_number = '', route = '';
+
+            result.results[0].address_components.map(val => {
               if(val.types[0] === 'postal_code') {
                 params.data.zip = val.long_name.replace('County', '').toUpperCase();
               }
@@ -49,43 +50,37 @@ class LocationSearchInput extends React.Component {
               if(val.types[0] === 'locality') {
                 params.data.city = val.long_name.toUpperCase();
               }
-              
-              let street_number = '', route = '';              
+                          
               if(val.types[0] === 'street_number') {
                 street_number = val.long_name;
               }
               if(val.types[0] === 'route') {
                 route = val.long_name;
               }
-              params.data.address = (street_number + route).toUpperCase();
             })
+            
+            params.data.address = (street_number + " " + route).toUpperCase();
+            params.data.longitude = longitude;
+            params.data.latitude = latitude;
+            const json = JSON.stringify(params.data);
+            const httpRequest = new XMLHttpRequest();
+            httpRequest.open(
+              "PUT",
+              `${dev_url}/api/updateData`,
+              true
+            );
+            httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
+            httpRequest.setRequestHeader('Authorization',localStorage.getItem('token'));
+            httpRequest.send(json);
+            params.api.purgeServerSideCache();
+            changeAddress();
+            changeState();
           }
         })
-
-
-        // params.data.address = realAddress[0];
-        // params.data.city = realAddress[1];
-        // params.data.state = realAddress[2];
-        params.data.longitude = longitude;
-        params.data.latitude = latitude;
-        console.log(")))", params.data);
-        const json = JSON.stringify(params.data);
-        const httpRequest = new XMLHttpRequest();
-        httpRequest.open(
-          "PUT",
-          `${dev_url}/api/updateData`,
-          true
-        );
-        httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
-        httpRequest.setRequestHeader('Authorization',localStorage.getItem('token'));
-        httpRequest.send(json);
-        params.api.purgeServerSideCache();
       })
       .catch(error => {
         console.log('error', error); // eslint-disable-line no-console
       });
-      changeAddress();
-      changeState();
   };
 
   handleCloseClick = () => {
@@ -104,7 +99,6 @@ class LocationSearchInput extends React.Component {
   };
 
   recover = () => {
-    console.log("jao;fjfds;")
     this.props.changeState();
   }
 
@@ -119,6 +113,7 @@ class LocationSearchInput extends React.Component {
           onSelect={this.handleSelect}
           onError={this.handleError}
           shouldFetchSuggestions={address.length > 2}
+          
         >
           {({ getInputProps, suggestions, getSuggestionItemProps }) => {
             if(suggestions.length > 0) {
@@ -137,8 +132,8 @@ class LocationSearchInput extends React.Component {
                     {...getInputProps({
                       placeholder: 'Search Places...',
                       className: 'Demo__search-input2',                      
-                    })}                    
-                    onBlur={this.recover}
+                    })}
+                    onBlur={this.recover} 
                     autoFocus
                   />
                 </div>

@@ -11,7 +11,7 @@ const AddNewAddressInput = (props) => {
 
   if(divState) {
     return (
-      <div className="search-input"><Input placeholder="Double click to search address" focus="false" onDoubleClick={() => setDivState(!divState)} bsSize="sm" value={address} onChange={onChange } /></div>
+      <div className="search-input"><Input placeholder="Double click to search address" focus="false" onDoubleClick={() => setDivState(!divState)} bsSize="sm" value={props.address} /></div>
     )
   } else {
     return (

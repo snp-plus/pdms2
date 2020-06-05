@@ -229,6 +229,7 @@ const AddNewRow = (props) => {
                 </div>
                 <div className="google_address" style={{width: "250px"}}>
                     <AddNewAddressInput 
+                        address={address}
                         setAddress={setAddress} 
                         setCity={setCity} 
                         setState={setState}
