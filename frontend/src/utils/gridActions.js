@@ -71,8 +71,7 @@ export const filterRows = (gridApi, values) => {
   const updateData = data => {
     var server = new FakeServer(data);
     var datasource = new ServerSideDatasource(server);
-    gridApi.api.setServerSideDatasource(datasource);    
-    if(localStorage.getItem('searchWord')) onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
+    gridApi.api.setServerSideDatasource(datasource);
   }
   const json = JSON.stringify(values);
   const httpRequest = new XMLHttpRequest();
