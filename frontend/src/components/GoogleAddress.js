@@ -31,14 +31,12 @@ class LocationSearchInput extends React.Component {
         latitude = lat;
         longitude = lng;
 
-        const realAddress = address.split(',');
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
         fetch(url)
           .then(res => res.json())
           .then(result => {
-            if(result.status === "OK") {              
+            if(result.status === "OK") {
               let street_number = "", route = "";
-
               result.results[0].address_components.map((val) => {
                 if(val.types[0] === 'postal_code') {
                   const zip = val.long_name;
@@ -63,18 +61,18 @@ class LocationSearchInput extends React.Component {
                   route = val.long_name;
                 }
               })
-
               setAddress((street_number + " " + route).toUpperCase());
               setInputAddress((street_number + " " + route).toUpperCase());
               changeDivState();
-              // setAddress(realAddress[0].toUpperCase());
-              // setInputAddress(realAddress[0].toUpperCase());
               setLatitude(latitude);
               setLongitude(longitude);
+            } else {              
+              alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
             }
-          })        
+          })
       })
-      .catch(error => {
+      .catch(error => {        
+        alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
         console.log('error', error); // eslint-disable-line no-console
       });
   };
