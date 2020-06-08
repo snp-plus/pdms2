@@ -33,10 +33,11 @@ class LocationSearchInput extends React.Component {
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
         fetch(url)
         .then(res => res.json())
-        .then(result => {
-          if(result.status === "OK") {         
+        .then(result => {          
+          console.log("re=-=-=-=t", result);
+          if(result.status === "OK") {
+            console.log("result", result);
             let street_number = '', route = '';
-
             result.results[0].address_components.map(val => {
               if(val.types[0] === 'postal_code') {
                 params.data.zip = val.long_name.replace('County', '').toUpperCase();
@@ -75,10 +76,15 @@ class LocationSearchInput extends React.Component {
             params.api.purgeServerSideCache();
             changeAddress();
             changeState();
+          } else {
+            alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
+            this.recover();
           }
         })
       })
       .catch(error => {
+        alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
+        this.recover();
         console.log('error', error); // eslint-disable-line no-console
       });
   };
