@@ -78,7 +78,6 @@ export const addNewRow = (gridApi, values) => {
       });
       updateData(JSON.parse(httpRequest.responseText));
     } else {
-      console.log(httpRequest)
       if(httpRequest.readyState !== 2 && httpRequest.readyState !== 3) {
         store.addNotification({
           title: 'Alert',
@@ -156,7 +155,9 @@ export const onRemoveSelected = (gridApi, user) => {
     var server = new FakeServer(data);
     var datasource = new ServerSideDatasource(server);
     gridApi.api.setServerSideDatasource(datasource);
-    if(localStorage.getItem('searchWord')) onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
+    if(localStorage.getItem('searchWord')) {
+      onQuickFilterChanged(gridApi, localStorage.getItem('searchWord'));
+    }
   }
 
   const httpRequest = new XMLHttpRequest();

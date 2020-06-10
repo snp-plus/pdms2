@@ -486,6 +486,8 @@ const Management = () => {
         params.api.setServerSideDatasource(datasource);
       }
 
+      localStorage.setItem('searchWord', '');
+
       const httpRequest = new XMLHttpRequest();
       httpRequest.open(
         "GET",
