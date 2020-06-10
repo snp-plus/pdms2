@@ -36,7 +36,6 @@ class LocationSearchInput extends React.Component {
         .then(res => res.json())
         .then(result => {
           if(result.status === "OK") {
-            console.log("result", result);
             let street_number = '', route = '';
             result.results[0].address_components.map(val => {
               if(val.types[0] === 'postal_code') {
