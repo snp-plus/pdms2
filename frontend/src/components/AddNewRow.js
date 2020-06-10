@@ -3,6 +3,7 @@ import { Input, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Button } f
 import AddNewAddressInput from './AddNewAddressInput';
 import { addNewRow } from '../utils/gridActions';
 import { AiFillUpCircle } from 'react-icons/ai';
+import { store } from 'react-notifications-component';
 
 const AddNewRow = (props) => {
     const [degreeDropdownOpen, setDegreeDropdownOpen] = useState(false);
@@ -130,6 +131,25 @@ const AddNewRow = (props) => {
         const mpn1203 = document.getElementById("mpn1203").checked;
         const mpn3104 = document.getElementById("mpn3104").checked;
         const deleted = document.getElementById("deleted").checked;
+                
+        const empty = firstname + lastname + entity + suite + address + city + state + zip + phone + fax + latitude + longitude + taxid + statelicensenumber + county + workinghrs + priority;
+
+        if(empty === '') {
+            store.addNotification({
+                title: 'Alert',
+                message: 'Please check all items if you put correctly',
+                type: 'danger',
+                insert: 'top',
+                container: 'top-right',
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 3000,
+                    onScreen: true
+                }
+            });
+            return;        
+        }
 
         addNewRow(props.gridApi, {firstname, lastname, degree, entity, specialty, dwc, code,
             suite, address, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, newid, 
