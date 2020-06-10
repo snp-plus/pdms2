@@ -7,6 +7,7 @@ import PlacesAutocomplete, {
 import { classnames } from '../utils/helpers.js';
 import { dev_url } from '../utils/url';
 import { DebounceInput } from 'react-debounce-input';
+import { store } from 'react-notifications-component';
 
 class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class LocationSearchInput extends React.Component {
   };
 
   handleSelect = selected => {
-    const { params, changeAddress, changeState, oldAddress } = this.props;
+    const { params, changeAddress, changeState } = this.props;
     const address = selected;
     let latitude, longitude;
 
@@ -33,8 +34,7 @@ class LocationSearchInput extends React.Component {
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDDN7gt1rPdo6InIWrZ9cUlEDt07hfUxBw&libraries`;
         fetch(url)
         .then(res => res.json())
-        .then(result => {          
-          console.log("re=-=-=-=t", result);
+        .then(result => {
           if(result.status === "OK") {
             console.log("result", result);
             let street_number = '', route = '';
@@ -77,13 +77,37 @@ class LocationSearchInput extends React.Component {
             changeAddress();
             changeState();
           } else {
-            alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
+            store.addNotification({
+              title: 'Alert',
+              message: 'You have exceeded your rate-limit for this API. Please wait some time and try again',
+              type: 'danger',
+              insert: 'top',
+              container: 'top-right',
+              animationIn: ['animated', 'fadeIn'],
+              animationOut: ['animated', 'fadeOut'],
+              dismiss: {
+                duration: 8000,
+                onScreen: true
+              }
+            });
             this.recover();
           }
         })
       })
       .catch(error => {
-        alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
+        store.addNotification({
+          title: 'Alert',
+          message: 'You have exceeded your rate-limit for this API. Please wait some time and try again',
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animated', 'fadeIn'],
+          animationOut: ['animated', 'fadeOut'],
+          dismiss: {
+            duration: 8000,
+            onScreen: true
+          }
+        });
         this.recover();
         console.log('error', error); // eslint-disable-line no-console
       });

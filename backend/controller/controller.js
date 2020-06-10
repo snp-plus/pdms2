@@ -103,7 +103,6 @@ class MainController {
     async addNewData(req, res){
       try {
         const value = req.body;
-        console.log(value)
         const pool = await poolPromise        
         const result1 = await pool.request()
         .input('first',sql.VarChar , value.firstname)

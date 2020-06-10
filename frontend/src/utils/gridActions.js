@@ -1,5 +1,6 @@
 import { ServerSideDatasource, FakeServer } from './gridFunctions.js';
 import { dev_url } from './url';
+import { store } from 'react-notifications-component';
 
 export const onQuickFilterChanged = (gridApi, value) => {
   const json = JSON.stringify({value: value});
@@ -62,7 +63,37 @@ export const addNewRow = (gridApi, values) => {
   httpRequest.send(json);
   httpRequest.onreadystatechange = () => {
     if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+      store.addNotification({
+        title: 'Alert',
+        message: 'New provider was successfully saved',
+        type: 'success',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animated', 'fadeIn'],
+        animationOut: ['animated', 'fadeOut'],
+        dismiss: {
+            duration: 3000,
+            onScreen: true
+        }
+      });
       updateData(JSON.parse(httpRequest.responseText));
+    } else {
+      console.log(httpRequest)
+      if(httpRequest.readyState !== 2 && httpRequest.readyState !== 3) {
+        store.addNotification({
+          title: 'Alert',
+          message: 'New provider was not saved',
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animated', 'fadeIn'],
+          animationOut: ['animated', 'fadeOut'],
+          dismiss: {
+            duration: 3000,
+            onScreen: true
+          }
+        });
+      }      
     }
   };
 }

@@ -7,6 +7,7 @@ import PlacesAutocomplete, {
 import { Input } from 'reactstrap';
 import { classnames } from '../utils/helpers.js';
 import { DebounceInput } from 'react-debounce-input';
+import { store } from 'react-notifications-component';
 
 class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -67,12 +68,36 @@ class LocationSearchInput extends React.Component {
               setLatitude(latitude);
               setLongitude(longitude);
             } else {              
-              alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
+              store.addNotification({
+                title: 'Alert',
+                message: 'You have exceeded your rate-limit for this API. Please wait some time and try again',
+                type: 'danger',
+                insert: 'top',
+                container: 'top-right',
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                  duration: 8000,
+                  onScreen: true
+                }
+              });
             }
           })
       })
       .catch(error => {        
-        alert("You have exceeded your rate-limit for this API. Please wait some time and try again");
+        store.addNotification({
+          title: 'Alert',
+          message: 'You have exceeded your rate-limit for this API. Please wait some time and try again',
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animated', 'fadeIn'],
+          animationOut: ['animated', 'fadeOut'],
+          dismiss: {
+            duration: 8000,
+            onScreen: true
+          }
+        });
         console.log('error', error); // eslint-disable-line no-console
       });
   };
