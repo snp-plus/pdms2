@@ -35,6 +35,7 @@ const FilterPanel = (props) => {
     const [taxid, setTaxid] = useState('');
     const [statelicensenumber, setStatelicensenumber] = useState('');
     const [county, setCounty] = useState('');
+    const [npi, setNpi] = useState('');
     const [workinghrs, setWorkinghrs] = useState('');
     const [priority, setPriority] = useState('');
     const [newid, setNewid] = useState('');
@@ -193,6 +194,11 @@ const FilterPanel = (props) => {
                 seleted: document.getElementById("county-flag").checked,
                 checkbox: false,
                 value: county
+            },{
+                item: 'npi',
+                seleted: document.getElementById("npi-flag").checked,
+                checkbox: false,
+                value: npi
             },{
                 item: 'workinghrs',
                 seleted: document.getElementById("workinghrs-flag").checked,
@@ -370,6 +376,7 @@ const FilterPanel = (props) => {
         setTaxid('');
         setStatelicensenumber('');
         setCounty('');
+        setNpi('');
         setWorkinghrs('');
         setPriority('');
         setNewid('');
@@ -450,6 +457,7 @@ const FilterPanel = (props) => {
         document.getElementById("taxid-flag").checked = false;
         document.getElementById("statelicensenumber-flag").checked = false;
         document.getElementById("county-flag").checked = false;
+        document.getElementById("npi-flag").checked = false;
         document.getElementById("workinghrs-flag").checked = false;
         document.getElementById("priority-flag").checked = false;
 
@@ -718,6 +726,16 @@ const FilterPanel = (props) => {
                             </InputGroupText>
                         </InputGroupAddon>
                     <Input placeholder="county" bsSize="sm" value={county} onChange={(e) => setCounty(e.target.value.toUpperCase())} />
+                    </InputGroup>
+                </div>
+                <div>
+                    <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                                <Input addon type="checkbox" id="npi-flag" aria-label="check this it is filter item" />
+                            </InputGroupText>
+                        </InputGroupAddon>
+                    <Input placeholder="npi" bsSize="sm" value={npi} onChange={(e) => setNpi(e.target.value.toUpperCase())} />
                     </InputGroup>
                 </div>
                 <div>

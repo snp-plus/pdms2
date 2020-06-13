@@ -38,6 +38,7 @@ const AddNewRow = (props) => {
     const [taxid, setTaxid] = useState('');
     const [statelicensenumber, setStatelicensenumber] = useState('');
     const [county, setCounty] = useState('');
+    const [npi, setNpi] = useState('');
     const [workinghrs, setWorkinghrs] = useState('');
     const [priority, setPriority] = useState('');
     const [newid, setNewid] = useState('');
@@ -96,6 +97,7 @@ const AddNewRow = (props) => {
         setTaxid('');
         setStatelicensenumber('');
         setCounty('');
+        setNpi('');
         setWorkinghrs('');
         setPriority('');
         setNewid('');
@@ -132,7 +134,7 @@ const AddNewRow = (props) => {
         const mpn3104 = document.getElementById("mpn3104").checked;
         const deleted = document.getElementById("deleted").checked;
                 
-        const empty = firstname + lastname + entity + suite + address + city + state + zip + phone + fax + latitude + longitude + taxid + statelicensenumber + county + workinghrs + priority;
+        const empty = firstname + lastname + entity + suite + address + city + state + zip + phone + fax + latitude + longitude + taxid + statelicensenumber + county + npi + workinghrs + priority;
 
         if(empty === '') {
             store.addNotification({
@@ -152,7 +154,7 @@ const AddNewRow = (props) => {
         }
 
         addNewRow(props.gridApi, {firstname, lastname, degree, entity, specialty, dwc, code,
-            suite, address, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, newid, 
+            suite, address, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, npi, workinghrs, priority, referral, newid, 
             mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, 
             mpn2474, mpn2473, mpn0598, mpn2502, mpn2469, mpn2468, mpn2376, mpn2394, mpn1203, mpn3104, deleted});
     }
@@ -272,6 +274,7 @@ const AddNewRow = (props) => {
                 <div><Input placeholder="taxid" bsSize="sm" value={taxid} onChange={(e) => setTaxid(e.target.value.toUpperCase())}/></div>
                 <div style={{width: "130px"}}><Input placeholder="statelicensenumber" bsSize="sm" value={statelicensenumber} onChange={(e) => setStatelicensenumber(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="county" bsSize="sm" value={county.toUpperCase()} readOnly/></div>
+                <div style={{width: "150px"}}><Input placeholder="npi" bsSize="sm" value={npi} onChange={(e) => setNpi(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="workinghrs" bsSize="sm" value={workinghrs} onChange={(e) => setWorkinghrs(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="priority" bsSize="sm" value={priority} onChange={(e) => setPriority(e.target.value.toUpperCase())}/></div>
                 <div><Input placeholder="newid" bsSize="sm" value={newid} onChange={(e) => setNewid(e.target.value.toUpperCase())}/></div>

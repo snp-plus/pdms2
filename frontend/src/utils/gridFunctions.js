@@ -20,6 +20,7 @@ export function createNewRowData() {
     taxid: "",
     statelicensenumber: "",
     country: "",
+    npi: "",
     workinghrs: "",
     priority: "",
     referral: "",
@@ -171,6 +172,10 @@ function filterData(filterModel, data) {
       continue;
     }
     if (item.county && filterModel.county && item.county.includes(filterModel.county.filter) ) {
+      resultOfFilter.push(item);
+      continue;
+    }
+    if (item.npi && filterModel.npi && item.npi.includes(filterModel.npi.filter) ) {
       resultOfFilter.push(item);
       continue;
     }
