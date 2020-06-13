@@ -178,6 +178,7 @@ const Management = () => {
     {headerName: 'taxid', field: 'taxid'},
     {headerName: 'statelicensenumber', field: 'statelicensenumber'},
     {headerName: 'county', field: 'county', editable: false},
+    {headerName: 'npi', field: 'npi', editable: false},
     {headerName: 'workinghrs', field: 'workinghrs'},
     {
       headerName: 'priority', 

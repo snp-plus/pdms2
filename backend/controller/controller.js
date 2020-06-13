@@ -8,7 +8,7 @@ let cnt = 0;
 
 async function insertRow(value, pool, rows_cnt) {
   let findQuery = `SELECT * FROM [dbo].[contacts] WHERE first = "${value.first}" AND last = "${value.last}" AND degree = "${value.degree}" AND entity = "${value.entity}" AND specialty = "${value.specialty}" AND dwc = "${value.dwc}" AND code = "${value.code}" AND address = "${value.address}" AND suite = "${value.suite}" AND city = "${value.city}" AND state = "${value.state}" AND zip = "${value.zip}" AND phone = "${value.phone}" AND fax = "${value.fax}" 
-                AND latitude = "${value.latitude}" AND longitude = "${value.longitude}" AND taxid = "${value.taxid}" AND statelicensenumber = "${value.statelicensenumber}" AND county = "${value.county}" AND workinghrs = "${value.workinghrs}" AND priority = "${value.priority}" AND referral = "${value.referral}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND mpn0701 = "${value.mpn0701}" AND mpn2347 = "${value.mpn2347}" AND mpn2125 = "${value.mpn2125}" AND mpn2128 = "${value.mpn2128}" AND mpn2126 = "${value.mpn2126}" AND mpn2127 = "${value.mpn2127}" AND mpn2129 = "${value.mpn2129}" AND mpn2130 = "${value.mpn2130}" AND mpn2173 = "${value.mpn2173}" AND mpn2079 = "${value.mpn2079}" AND mpn1635 = "${value.mpn1635}" AND mpn1636 = "${value.mpn1636}" AND mpn1637 = "${value.mpn1637}" AND mpn2474 = "${value.mpn2474}" AND mpn2473 = "${value.mpn2473}" AND mpn0598 = "${value.mpn0598}" AND mpn2502 = "${value.mpn2502}" AND mpn2469 = "${value.mpn2469}" 
+                AND latitude = "${value.latitude}" AND longitude = "${value.longitude}" AND taxid = "${value.taxid}" AND statelicensenumber = "${value.statelicensenumber}" AND county = "${value.county}" AND npi = "${value.npi}" AND workinghrs = "${value.workinghrs}" AND priority = "${value.priority}" AND referral = "${value.referral}" AND mpn3095 = "${value.mpn3095}" AND mpn3096 = "${value.mpn3096}" AND mpn3097 = "${value.mpn3097}" AND mpn0701 = "${value.mpn0701}" AND mpn2347 = "${value.mpn2347}" AND mpn2125 = "${value.mpn2125}" AND mpn2128 = "${value.mpn2128}" AND mpn2126 = "${value.mpn2126}" AND mpn2127 = "${value.mpn2127}" AND mpn2129 = "${value.mpn2129}" AND mpn2130 = "${value.mpn2130}" AND mpn2173 = "${value.mpn2173}" AND mpn2079 = "${value.mpn2079}" AND mpn1635 = "${value.mpn1635}" AND mpn1636 = "${value.mpn1636}" AND mpn1637 = "${value.mpn1637}" AND mpn2474 = "${value.mpn2474}" AND mpn2473 = "${value.mpn2473}" AND mpn0598 = "${value.mpn0598}" AND mpn2502 = "${value.mpn2502}" AND mpn2469 = "${value.mpn2469}" 
                 AND mpn2468 = "${value.mpn2468}" AND mpn2376 = "${value.mpn2376}" AND mpn2394 = "${value.mpn2394}" AND mpn1203 = "${value.mpn1203}" AND mpn3104 = "${value.mpn3104}" AND deleted = "${value.deleted}" AND newid = "${value.newid}"`;
   findQuery = findQuery.replace(/\'/gi, "\''");
   findQuery = findQuery.replace(/\"/gi, "'");
@@ -19,15 +19,15 @@ async function insertRow(value, pool, rows_cnt) {
     cnt ++;
     return cnt === rows_cnt;
   } else {
-    let insertQuery = "INSERT INTO  [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, workinghrs, priority, referral, mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, mpn2474, mpn2473, mpn0598, mpn2502, mpn2469, mpn2468, mpn2376, mpn2394, mpn1203, mpn3104, deleted, created, newid) VALUES ";
-    let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.mpn0701}","${value.mpn2347}","${value.mpn2125}","${value.mpn2128}","${value.mpn2126}","${value.mpn2127}","${value.mpn2129}","${value.mpn2130}","${value.mpn2173}","${value.mpn2079}","${value.mpn1635}","${value.mpn1636}","${value.mpn1637}","${value.mpn2474}","${value.mpn2473}","${value.mpn0598}","${value.mpn2502}","${value.mpn2469}","${value.mpn2468}","${value.mpn2376}","${value.mpn2394}","${value.mpn1203}","${value.mpn3104}","${value.deleted}","${value.created}", "${value.newid}")`;
+    let insertQuery = "INSERT INTO  [dbo].[contacts] (first, last, degree, entity, specialty, dwc, code, address, suite, city, state, zip, phone, fax, latitude, longitude, taxid, statelicensenumber, county, npi, workinghrs, priority, referral, mpn3095, mpn3096, mpn3097, mpn0701, mpn2347, mpn2125, mpn2128, mpn2126, mpn2127, mpn2129, mpn2130, mpn2173, mpn2079, mpn1635, mpn1636, mpn1637, mpn2474, mpn2473, mpn0598, mpn2502, mpn2469, mpn2468, mpn2376, mpn2394, mpn1203, mpn3104, deleted, created, newid) VALUES ";
+    let row = `("${value.first}","${value.last}","${value.degree}","${value.entity}","${value.specialty}","${value.dwc}","${value.code}","${value.address}","${value.suite}","${value.city}","${value.state}","${value.zip}","${value.phone}","${value.fax}","${value.latitude}","${value.longitude}","${value.taxid}","${value.statelicensenumber}","${value.county}","${value.npi}", "${value.workinghrs}","${value.priority}","${value.referral}","${value.mpn3095}","${value.mpn3096}","${value.mpn3097}","${value.mpn0701}","${value.mpn2347}","${value.mpn2125}","${value.mpn2128}","${value.mpn2126}","${value.mpn2127}","${value.mpn2129}","${value.mpn2130}","${value.mpn2173}","${value.mpn2079}","${value.mpn1635}","${value.mpn1636}","${value.mpn1637}","${value.mpn2474}","${value.mpn2473}","${value.mpn0598}","${value.mpn2502}","${value.mpn2469}","${value.mpn2468}","${value.mpn2376}","${value.mpn2394}","${value.mpn1203}","${value.mpn3104}","${value.deleted}","${value.created}", "${value.newid}")`;
     insertQuery += row;
     insertQuery = insertQuery.replace(/\'/gi, "\''");
     insertQuery = insertQuery.replace(/\"/gi, "'");
     const result = await pool.request().query(insertQuery);
     cnt ++;
     return cnt === rows_cnt;
-  } 
+  }
 }
 
 class MainController {
@@ -73,7 +73,7 @@ class MainController {
     async quicksearch(req , res){
       try {
         const value = req.body.value;
-        const query = `SELECT * FROM [dbo].[contacts] WHERE first LIKE '%${value}%' OR last LIKE '%${value}%' OR degree LIKE '%${value}%' OR entity LIKE '%${value}%' OR specialty LIKE '%${value}%' OR dwc LIKE '%${value}%' OR code LIKE '%${value}%' OR address LIKE '%${value}%' OR suite LIKE '%${value}%' OR city LIKE '%${value}%' OR state LIKE '%${value}%' OR zip LIKE '%${value}%' OR phone LIKE '%${value}%' OR fax LIKE '%${value}%' OR latitude LIKE '%${value}%' OR longitude LIKE '%${value}%' OR taxid LIKE '%${value}%' OR statelicensenumber LIKE '%${value}%' OR county LIKE '%${value}%' OR workinghrs LIKE '%${value}%' OR priority LIKE '%${value}%' OR referral LIKE '%${value}%'`;
+        const query = `SELECT * FROM [dbo].[contacts] WHERE first LIKE '%${value}%' OR last LIKE '%${value}%' OR degree LIKE '%${value}%' OR entity LIKE '%${value}%' OR specialty LIKE '%${value}%' OR dwc LIKE '%${value}%' OR code LIKE '%${value}%' OR address LIKE '%${value}%' OR suite LIKE '%${value}%' OR city LIKE '%${value}%' OR state LIKE '%${value}%' OR zip LIKE '%${value}%' OR phone LIKE '%${value}%' OR fax LIKE '%${value}%' OR latitude LIKE '%${value}%' OR longitude LIKE '%${value}%' OR taxid LIKE '%${value}%' OR statelicensenumber LIKE '%${value}%' OR county LIKE '%${value}%' OR npi LIKE '%${value}%' OR workinghrs LIKE '%${value}%' OR priority LIKE '%${value}%' OR referral LIKE '%${value}%'`;
         const pool = await poolPromise;
         const result = await pool.request()
         .query(query)
@@ -124,6 +124,7 @@ class MainController {
         .input('taxid',sql.VarChar,value.taxid)
         .input('statelicensenumber',sql.VarChar,value.statelicensenumber)
         .input('county',sql.VarChar,value.county)
+        .input('npi',sql.VarChar,value.npi)
         .input('workinghrs',sql.VarChar,value.workinghrs)
         .input('priority',sql.VarChar,value.priority)
         .input('referral',sql.Bit,value.referral * 1)
@@ -191,6 +192,7 @@ class MainController {
         .input('taxid',sql.VarChar,value.taxid)
         .input('statelicensenumber',sql.VarChar,value.statelicensenumber)
         .input('county',sql.VarChar,value.county)
+        .input('npi',sql.VarChar,value.npi)
         .input('workinghrs',sql.VarChar,value.workinghrs)
         .input('priority',sql.VarChar,value.priority)
         .input('referral',sql.Bit,value.referral)
@@ -263,6 +265,7 @@ class MainController {
             .input('taxid',sql.VarChar,value.taxid)
             .input('statelicensenumber',sql.VarChar,value.statelicensenumber)
             .input('county',sql.VarChar,value.county)
+            .input('npi',sql.VarChar,value.npi)
             .input('workinghrs',sql.VarChar,value.workinghrs)
             .input('priority',sql.VarChar,value.priority)
             .input('referral',sql.Bit,value.referral)

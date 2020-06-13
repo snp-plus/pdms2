@@ -112,6 +112,7 @@ export const defalutColumnDefs = [
     headerName: 'county', 
     field: 'county'
   },
+  {headerName: 'npi', field: 'npi'},
   {headerName: 'workinghrs', field: 'workinghrs'},
   {headerName: 'priority', field: 'priority'},
   {
